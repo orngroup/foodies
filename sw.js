@@ -1,8 +1,8 @@
 // Foodies service worker — offline caching + notifications
 const CACHE = 'foodies-v1';
 const ASSETS = [
-  './','./index.html','./manifest.webmanifest',
-  './icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon.png'
+  './','./index.html','./manifest.webmanifest','./venues.js',
+  './icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon.png','./icon-192-maskable.png','./icon-512-maskable.png'
 ];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).catch(()=>{}));

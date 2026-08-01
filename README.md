@@ -1,51 +1,55 @@
-# Foodies — installable PWA demo
+# Find Foodies — full PWA demo
 
-**Love Food. Love Life.** A dating app that matches people on shared cuisine, suggests a venue that works for both, and books the table.
+**Love Food. Love Life.** A dating & meet-up app that matches people on shared cuisine, then helps them find a venue and book a table.
 
-This is a self-contained **clickable demo** — no backend, no real accounts. All images (your headshots + venue art + app icon) are bundled, so it works fully offline once loaded.
+Self-contained **clickable demo** (demo mode — sample data, no live backend). All images and data are bundled, so it runs fully offline once loaded. Destined for **findfoodies.com**.
 
-## What's new in this version
-- Uses your **real headshots** for profiles
-- A proper **Foodies app icon** (script "F" + heart, brand red, maskable for Android/iOS)
-- **Installable**: an "Install Foodies" prompt on Android/Chrome, and Add-to-Home-Screen guidance on iPhone
-- **Notifications**: asks permission at a natural moment, then sends real alerts on new matches, messages and bookings (also re-triggerable from Profile → Notifications)
-- Works offline via a service worker
-
-## The full journey
-Onboarding (social/email → details → cuisine → dietary/faith prefs → verified photo) → **swipe matching** with shared-cuisine highlighting, super-like & rewind → "It's a Match" that suggests a venue for **both** → chat with icebreakers, typing indicators & in-chat venue sharing → venue detail → **book a table** → confirmation with the offer applied → profile, safety prompts, Free vs **Gold Foodie** plans.
+## Complete feature set
+- **Sign-up** — Google (realistic account-picker), Apple, Instagram, Facebook, or email
+- **Onboarding** — details → cuisine picker → dietary & faith prefs (halal, kosher, vegan…) → verified photo
+- **Swipe matching** — drag cards or buttons; green tags = cuisines you *both* love; super-like & rewind
+- **"It's a Match"** — instantly suggests a venue that works for *both*
+- **Chat** — icebreakers, typing indicators, in-chat venue sharing
+- **Video date** — private in-app call before meeting (number stays hidden)
+- **Safety centre** — share-my-plan, safe-arrival check-in, meet-in-public, block & report
+- **Venues** — 24 sample London restaurants with postcode/area search, distance radius, dietary & offer filters, list + map view
+- **Meet-ups** — group dining tables to join, not just 1-on-1
+- **Book a table** → confirmation with the venue's offer applied
+- **Profile**, Free vs **Gold Foodie** (£14.99/mo), Help & contact (hello@findfoodies.com)
+- **Installable PWA** — real "heart + fork" app icon, offline support, notifications for matches/messages/bookings
 
 ## Files
 ```
-index.html                  the app
-sw.js                       service worker (offline + notifications)
-manifest.webmanifest        install metadata
-icon-192/512.png            app icons (any)
-icon-192/512-maskable.png   app icons (maskable)
-apple-touch-icon.png        iOS home-screen icon
-favicon.png                 browser tab icon
-img/                        headshots (p*.jpg) + venue art (v*.jpg)
+index.html                app
+venues.js                 London venue dataset (areas, postcodes, coordinates)
+sw.js                     service worker (offline + notifications)
+manifest.webmanifest      install metadata (Find Foodies)
+icon-*.png                app icons — heart with a fork (incl. maskable)
+apple-touch-icon.png      iOS home-screen icon
+favicon.png               tab icon
+img/                      headshots (p*.jpg) + venue art (rv*.jpg)
 ```
 
 ## Host on GitHub Pages
-1. Create a repo (e.g. `foodies-demo`).
-2. Upload **everything in this folder, keeping the `img/` folder** to the repo root.
+1. Create a repo (e.g. `findfoodies`).
+2. Upload **everything, keeping the `img/` folder**, to the repo root.
 3. Settings → **Pages** → Deploy from a branch → `main` / root → Save.
-4. Live at `https://<username>.github.io/foodies-demo/` in ~1 minute.
+4. Live at `https://<username>.github.io/findfoodies/` in ~1 minute.
 
-### Installing on your phone
-- Open the Pages URL in the phone browser.
-- **Android/Chrome:** tap **Install** on the banner (or menu → Install app). It asks for notifications after you enter the app.
-- **iPhone/Safari:** tap **Share → Add to Home Screen**. Open it from the icon; it runs full-screen.
+Later, point **findfoodies.com** at it (GitHub Pages supports custom domains under Settings → Pages).
 
-> Notifications and install require **HTTPS** — which GitHub Pages provides automatically. They won't work from a file opened directly off disk.
+### On your phone
+- **Android/Chrome:** tap **Install** on the banner. It asks for notifications after you enter the app.
+- **iPhone/Safari:** **Share → Add to Home Screen**, open from the icon.
+- Install & notifications need **HTTPS** — GitHub Pages provides it automatically.
 
-## Run locally
-```
-python3 -m http.server 8000
-```
-then visit http://localhost:8000 (note: install/notifications need the hosted HTTPS URL).
+## What's real vs demo
+- **Real:** London areas, postcodes, coordinates, distance maths, search, all UI flows, installability, notifications.
+- **Demo:** the restaurants & people are sample data; **Google/Apple/social sign-in is a realistic mock** — genuine OAuth needs a backend + Google Cloud project + client ID. Live restaurant data and street maps also come with the backend build.
 
-## Next steps
-- Build the **venue portal** (offers, incoming bookings, pay-per-booking fee) and **admin backend**.
-- Wire real auth (Google/Apple/email), a database, and image storage behind this front end.
-- Gold price shown as £14.99/mo (original deck said £90) — adjust in `index.html`.
+## Next steps (the real build)
+1. **Backend** — real auth (Google/Apple/email OAuth), database (profiles, matches, messages, bookings), image storage.
+2. **Venue portal** — restaurants log in to post offers, see bookings, pay the per-booking fee.
+3. **Admin backend** — manage users, venues, revenue.
+4. **Live data** — real restaurants (e.g. Google Places API) and maps.
+5. Trademark check on "Find Foodies" (UK IPO, classes 9, 43, 45) before launch.
