@@ -10,8 +10,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <title>Foodies — Love Food. Love Life</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-192.png">
-<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -307,23 +307,23 @@ const me = { name:"You", cuisines:["Italian","Japanese","Lebanese"], diets:["Hal
 
 const FOODIES = [
   {id:1,name:"Amara",age:27,dist:"1.2 mi",looking:"Relationship",verified:true,
-   img:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=80",
+   img:"img/p4.jpg",
    cuisines:["Italian","Lebanese","Thai"],
    prompt:{q:"My go-to comfort dish",a:"A proper bowl of cacio e pepe on a rainy night."}},
   {id:2,name:"Priya",age:29,dist:"0.8 mi",looking:"Something casual",verified:true,
-   img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=80",
+   img:"img/p1.jpg",
    cuisines:["Indian","Japanese","Korean"],
    prompt:{q:"Order for the table or your own?",a:"Order for the table — always. Sharing is the whole point."}},
   {id:3,name:"Sofia",age:25,dist:"2.4 mi",looking:"Relationship",verified:false,
-   img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80",
+   img:"img/p16.jpg",
    cuisines:["Japanese","Italian","French"],
    prompt:{q:"Best meal you've had this year",a:"Omakase in Soho. I still think about the uni."}},
   {id:4,name:"Leila",age:31,dist:"3.1 mi",looking:"New friends",verified:true,
-   img:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&q=80",
+   img:"img/p13.jpg",
    cuisines:["Lebanese","Turkish","Greek"],
    prompt:{q:"Sweet or savoury?",a:"Both, at once, no notes. Baklava counts as breakfast."}},
   {id:5,name:"Chloé",age:26,dist:"1.9 mi",looking:"Relationship",verified:true,
-   img:"https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=800&q=80",
+   img:"img/p8.jpg",
    cuisines:["French","Italian","Spanish"],
    prompt:{q:"Dream dinner guest",a:"Someone who'll split a bottle and stay for dessert."}}
 ];
@@ -332,22 +332,22 @@ const VENUES = [
   {id:1,name:"Hotel Casablanca",area:"Mayfair, London",rating:4.5,dist:"0.9 mi",price:"£££",
    cuisines:["Italian","Lebanese","Mediterranean"],diets:["Halal","Vegetarian"],
    tags:["Lounge","Live music","Couples"],offer:"2-for-1 cocktails before 7pm",
-   img:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
+   img:"img/v0.jpg",
    addr:"14 Downing Street, London",hours:"11:00am – 11:00pm"},
   {id:2,name:"Heart Cup Café",area:"Soho, London",rating:4.6,dist:"1.4 mi",price:"££",
    cuisines:["Italian","French","Brunch"],diets:["Vegan","Vegetarian","Gluten-free"],
    tags:["Cosy","Daytime","Coffee"],offer:"Free dessert with any two mains",
-   img:"https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80",
+   img:"img/v1.jpg",
    addr:"22 Old Compton St, London",hours:"8:00am – 10:00pm"},
   {id:3,name:"Park Hyatt",area:"Marylebone, London",rating:4.7,dist:"2.1 mi",price:"££££",
    cuisines:["Japanese","Chinese","Lebanese"],diets:["Halal","Pescatarian"],
    tags:["Rooftop","DJ","Poolside"],offer:null,
-   img:"https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?w=800&q=80",
+   img:"img/v2.jpg",
    addr:"120 Portman Square, London",hours:"12:00pm – 12:00am"},
   {id:4,name:"Blue Misty",area:"Shoreditch, London",rating:4.4,dist:"2.8 mi",price:"££",
    cuisines:["Japanese","Thai","Korean"],diets:["Vegan","Pescatarian"],
    tags:["Small plates","Natural wine"],offer:"20% off Sun–Thu for Foodies",
-   img:"https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800&q=80",
+   img:"img/v3.jpg",
    addr:"5 Redchurch St, London",hours:"5:00pm – 11:30pm"}
 ];
 
@@ -480,7 +480,7 @@ route("onboard",()=>{
       <h1 class="big" style="margin-bottom:6px">Add a few<br>photos</h1>
       <p class="h-sub" style="margin-bottom:20px">And a verified selfie — every Foodie is checked, so matches are real and safe. <span style="color:var(--teal);font-weight:700">✓ Verification keeps the community genuine.</span></p>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-        ${[0,1,2,3,4,5].map(i=>`<div style="aspect-ratio:3/4;border-radius:14px;background:${i===0?'#ddd':'var(--mist)'};display:flex;align-items:center;justify-content:center;color:#B7BFC9;font-size:26px;border:2px dashed ${i===0?'transparent':'#D6DCE3'};overflow:hidden">${i===0?'<img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" style="width:100%;height:100%;object-fit:cover">':'＋'}</div>`).join("")}
+        ${[0,1,2,3,4,5].map(i=>`<div style="aspect-ratio:3/4;border-radius:14px;background:${i===0?'#ddd':'var(--mist)'};display:flex;align-items:center;justify-content:center;color:#B7BFC9;font-size:26px;border:2px dashed ${i===0?'transparent':'#D6DCE3'};overflow:hidden">${i===0?'<img src="img/p6.jpg" style="width:100%;height:100%;object-fit:cover">':'＋'}</div>`).join("")}
       </div>
       <div style="display:flex;align-items:center;gap:9px;margin-top:18px;color:var(--teal);font-weight:700;font-size:13.5px">
         <span style="background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px">✓</span> Photo verified</div>`;
@@ -514,7 +514,7 @@ function toggleDiet(el,d){el.classList.toggle("on");const i=state.selDiets.index
 /* =========================================================
    MAIN APP SHELL + TABS
    ========================================================= */
-function enterApp(){state.tab="discover";go("app");}
+function enterApp(){state.tab="discover";go("app");setTimeout(askNotifications,900);}
 
 route("app",()=>{
   return `
@@ -616,6 +616,7 @@ function finishSwipe(card,dir){
       if(sh.length>=2){ // it's a match
         if(!state.matches.find(m=>m.id===f.id))state.matches.unshift(f);
         showMatch(f);
+        notify("It's a Match! 🎉",`You and ${f.name} both love ${shared(me.cuisines,f.cuisines).join(" & ")}. Say hello!`);
       }else toast(dir==="super"?"Super like sent ★":"Liked ♥");
     }
     initDeck();
@@ -634,7 +635,7 @@ function showMatch(f){
     <div class="script" style="font-size:40px;color:#fff">It's a Match!</div>
     <p style="opacity:.9;margin-top:6px;font-size:14px">You and ${f.name} both love ${shared(me.cuisines,f.cuisines).join(" & ")}</p>
     <div class="match-photos">
-      <img class="mp" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80">
+      <img class="mp" src="img/p6.jpg">
       <img class="mp" src="${f.img}">
     </div>
     <div style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 16px;width:100%;max-width:320px;text-align:left">
@@ -756,7 +757,7 @@ function quickSend(id,txt){state.threads[id].push({who:"me",text:txt});renderThr
 function replyLater(id){
   const th=$("#thread");const typ=document.createElement("div");typ.className="typing";typ.innerHTML="<i></i><i></i><i></i>";th.appendChild(typ);th.scrollTop=th.scrollHeight;
   const replies=["Ooh good question 😄","Yes! Let's do it.","I know the perfect place actually…","You had me at dessert."];
-  setTimeout(()=>{typ.remove();state.threads[id].push({who:"them",text:replies[Math.floor(Math.random()*replies.length)]});renderThread(id);},1400);
+  setTimeout(()=>{typ.remove();const rep=replies[Math.floor(Math.random()*replies.length)];state.threads[id].push({who:"them",text:rep});renderThread(id);const f=FOODIES.find(x=>x.id===id);if(current!=="chat"||state.activeChat!==id)notify(`${f?f.name:"Foodie"} sent a message`,rep);},1400);
 }
 
 /* ---------- SHARE VENUE in chat ---------- */
@@ -832,7 +833,7 @@ route("book",({id})=>{
 function stepGuests(n){state.bookGuests=Math.max(1,Math.min(12,state.bookGuests+n));$("#gv").textContent=state.bookGuests;}
 function pickDate(i){state.bookDate=i;document.querySelectorAll("#dateSeg .datep").forEach((d,idx)=>d.classList.toggle("on",idx===i));}
 function pickSlot(s){state.bookSlot=s;document.querySelectorAll("#slotGrid .slot").forEach(el=>el.classList.toggle("on",el.textContent.startsWith(s)));}
-function confirmBooking(id){if(!state.bookSlot){toast("Pick a time first");return;}go("booked",{id});}
+function confirmBooking(id){if(!state.bookSlot){toast("Pick a time first");return;}const v=VENUES.find(x=>x.id===id);notify("Table booked ✅",`${v.name} · ${state.bookGuests} guests at ${state.bookSlot} pm`);go("booked",{id});}
 
 route("booked",({id})=>{
   const v=VENUES.find(x=>x.id===id);
@@ -855,7 +856,7 @@ function tabProfile(){
   return `
     <div class="scroll">
       <div class="pfhero">
-        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80">
+        <img src="img/p6.jpg">
         <div class="grad"></div>
         <div class="nm"><h2>You, 28 <span style="font-size:15px;color:#4FC3F7">✓</span></h2>
           <div class="tier">👑 ${state.tier==='gold'?'Gold Foodie':'Free member'}</div></div>
@@ -865,6 +866,8 @@ function tabProfile(){
         <div class="divide"></div>
         <div class="menu-row" onclick="go('plans')"><span class="ic">👑</span> Go Gold — unlock chat & who likes you <span class="ar">›</span></div>
         <div class="menu-row" onclick="switchTabFromProfile('chats')"><span class="ic">📋</span> My bookings <span class="ar">›</span></div>
+        <div class="menu-row" onclick="doInstall()"><span class="ic">📲</span> Install Foodies app <span class="ar">›</span></div>
+        <div class="menu-row" onclick="manualNotif()"><span class="ic">🔔</span> Notifications <span class="ar">›</span></div>
         <div class="menu-row" onclick="toast('Favourites — demo')"><span class="ic">♥</span> Saved venues <span class="ar">›</span></div>
         <div class="menu-row" onclick="toast('Edit profile — demo')"><span class="ic">✏️</span> Edit profile & prompts <span class="ar">›</span></div>
         <div class="menu-row" onclick="toast('Safety centre — demo')"><span class="ic">🛡️</span> Safety centre <span class="ar">›</span></div>
@@ -874,6 +877,11 @@ function tabProfile(){
     </div>`;
 }
 function switchTabFromProfile(t){enterApp();setTimeout(()=>switchTab(t),50);}
+function manualNotif(){
+  if(!("Notification" in window)){toast("Notifications not supported here");return;}
+  if(Notification.permission==="granted"){notify("Notifications are on 🔔","Here's how a match alert looks.");toast("Notifications already on");}
+  else{sessionStorage.removeItem("notifAsked");askNotifications();}
+}
 
 /* ---------- PLANS ---------- */
 route("plans",()=>`
@@ -895,13 +903,81 @@ route("plans",()=>`
   </div>`);
 function setTier(t){state.tier=t;toast(t==='gold'?'Welcome to Gold Foodie 👑':'You are on the Free plan');enterApp();}
 
-/* ---------- boot ---------- */
-// register a tiny service worker for installability (inline via blob)
+/* ---------- PWA: service worker, install, notifications ---------- */
+let swReg=null, deferredInstall=null;
 if("serviceWorker" in navigator){
-  const sw=`self.addEventListener("install",e=>self.skipWaiting());self.addEventListener("activate",e=>self.clients.claim());self.addEventListener("fetch",()=>{});`;
-  const blob=new Blob([sw],{type:"application/javascript"});
-  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+  navigator.serviceWorker.register("sw.js").then(r=>{swReg=r;}).catch(()=>{});
 }
+// capture the install prompt (Android/Chrome)
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;showInstallBar();});
+window.addEventListener("appinstalled",()=>{deferredInstall=null;hideInstallBar();toast("Foodies installed 🎉");});
+
+function isStandalone(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;}
+function isIOS(){return /iphone|ipad|ipod/i.test(navigator.userAgent);}
+
+function showInstallBar(){
+  if(isStandalone()||document.getElementById("installBar"))return;
+  const b=document.createElement("div");b.id="installBar";
+  b.innerHTML=`<div style="display:flex;align-items:center;gap:12px">
+     <img src="icon-192.png" style="width:40px;height:40px;border-radius:11px">
+     <div style="flex:1;line-height:1.25"><b style="font-size:13.5px">Install Foodies</b><div style="font-size:11.5px;opacity:.75">Add to your home screen</div></div>
+     <button onclick="doInstall()" style="background:var(--red);color:#fff;border:0;border-radius:10px;padding:9px 15px;font-weight:700;font-size:13px;cursor:pointer">Install</button>
+     <button onclick="hideInstallBar()" style="background:none;border:0;font-size:20px;color:#9AA3B0;cursor:pointer">×</button>
+   </div>`;
+  Object.assign(b.style,{position:"absolute",left:"12px",right:"12px",bottom:"calc(12px + var(--safe-b))",background:"#fff",borderRadius:"16px",padding:"12px 14px",boxShadow:"var(--shadow-lg)",zIndex:80});
+  document.getElementById("device").appendChild(b);
+}
+function hideInstallBar(){const b=document.getElementById("installBar");if(b)b.remove();}
+function doInstall(){
+  if(deferredInstall){deferredInstall.prompt();deferredInstall.userChoice.finally(()=>{deferredInstall=null;hideInstallBar();});}
+  else if(isIOS()){showIOSInstall();}
+  else{toast("Use your browser menu → Add to Home Screen");hideInstallBar();}
+}
+function showIOSInstall(){
+  const m=document.createElement("div");m.id="iosSheet";
+  m.innerHTML=`<div style="background:#fff;border-radius:20px 20px 0 0;padding:22px;text-align:center">
+    <img src="icon-192.png" style="width:56px;height:56px;border-radius:15px;margin-bottom:10px">
+    <h3 style="font-size:17px;margin-bottom:6px">Install Foodies</h3>
+    <p style="font-size:13.5px;color:var(--slate);line-height:1.5">Tap the <b>Share</b> icon <span style="font-size:16px">􀈂</span> in Safari, then choose <b>“Add to Home Screen”</b>.</p>
+    <button onclick="document.getElementById('iosSheet').remove()" class="btn btn-coral" style="margin-top:16px">Got it</button></div>`;
+  Object.assign(m.style,{position:"absolute",inset:0,background:"rgba(0,0,0,.45)",zIndex:90,display:"flex",alignItems:"flex-end"});
+  m.onclick=e=>{if(e.target===m)m.remove();};
+  document.getElementById("device").appendChild(m);
+}
+
+// Notification permission — asked at a natural moment (after first match / entering app)
+function askNotifications(){
+  if(!("Notification" in window))return;
+  if(Notification.permission!=="default")return;      // already asked
+  if(sessionStorage.getItem("notifAsked"))return;
+  sessionStorage.setItem("notifAsked","1");
+  const m=document.createElement("div");m.id="notifSheet";
+  m.innerHTML=`<div style="background:#fff;border-radius:22px;padding:26px 22px;text-align:center;max-width:330px;margin:auto">
+    <div style="width:64px;height:64px;border-radius:50%;background:#FFE9E9;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 14px">🔔</div>
+    <h3 style="font-size:19px;margin-bottom:8px">Never miss a match</h3>
+    <p style="font-size:13.5px;color:var(--slate);line-height:1.55">Turn on notifications and we'll let you know about new matches, messages and table bookings.</p>
+    <button onclick="enableNotifications()" class="btn btn-primary" style="margin-top:18px">Turn on notifications</button>
+    <button onclick="document.getElementById('notifSheet').remove()" class="link" style="margin-top:14px;width:100%;color:var(--slate)">Not now</button>
+  </div>`;
+  Object.assign(m.style,{position:"absolute",inset:0,background:"rgba(0,0,0,.5)",zIndex:90,display:"flex",padding:"24px"});
+  document.getElementById("device").appendChild(m);
+}
+function enableNotifications(){
+  const sheet=document.getElementById("notifSheet");if(sheet)sheet.remove();
+  Notification.requestPermission().then(p=>{
+    if(p==="granted"){
+      toast("Notifications on 🔔");
+      notify("Welcome to Foodies!","We'll ping you the moment someone likes you.");
+    }else{toast("You can turn these on later in Settings");}
+  });
+}
+function notify(title,body){
+  if(!("Notification" in window)||Notification.permission!=="granted")return;
+  if(swReg&&swReg.active){swReg.active.postMessage({type:"notify",title,body});}
+  else{try{new Notification(title,{body,icon:"icon-192.png"});}catch(e){}}
+}
+
+/* ---------- boot ---------- */
 go("welcome");
 </script>
 </body>
