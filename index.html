@@ -2,1249 +2,207 @@
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#D80019">
-<meta name="description" content="Foodies — Love Food. Love Life. Meet people who share your taste.">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="mobile-web-app-capable" content="yes">
-<title>Find Foodies — Love Food. Love Life</title>
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" href="favicon.png">
+<title>Find Foodies — Love Food. Love Life.</title>
+<meta name="description" content="The dating app that matches you on food. Meet people who share your taste, then find the perfect place to eat.">
+<link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --red:#D80019;
-  --red-deep:#A80014;
-  --red-dark:#7C0010;
-  --coral:#F26D6D;
-  --coral-soft:#F79A9A;
-  --teal:#12B5A5;
-  --ink:#1C2430;
-  --slate:#5A6472;
-  --mist:#EEF1F4;
-  --line:#E4E8ED;
-  --white:#ffffff;
-  --gold:#D9A441;
-  --shadow:0 10px 30px rgba(20,20,30,.14);
-  --shadow-lg:0 24px 60px rgba(20,20,30,.28);
-  --safe-b:env(safe-area-inset-bottom,0px);
-}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
-body{
-  font-family:'Inter',system-ui,-apple-system,sans-serif;
-  background:#2a2d33;
-  color:var(--ink);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-}
-.script{font-family:'Pacifico',cursive;font-weight:400}
-
-/* ---------- Phone frame ---------- */
-#device{
-  position:relative;
-  width:min(430px,100vw);
-  height:min(932px,100vh);
-  background:var(--white);
-  overflow:hidden;
-  box-shadow:var(--shadow-lg);
-}
-@media(min-width:460px) and (min-height:960px){
-  #device{border-radius:44px;border:12px solid #0d0d10;height:900px}
-}
-#screens{position:absolute;inset:0}
-.screen{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  opacity:0;visibility:hidden;transform:translateX(24px);
-  transition:opacity .32s ease,transform .32s ease,visibility .32s;
-  background:var(--white);
-}
-.screen.active{opacity:1;visibility:visible;transform:none;z-index:2}
-.screen.red-bg{background:var(--red)}
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.scroll::-webkit-scrollbar{width:0}
-
-/* ---------- Shared UI ---------- */
-.pad{padding:22px}
-.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.brandmark{font-family:'Pacifico',cursive;color:#fff;line-height:1}
-.tag{letter-spacing:3px;font-size:11px;font-weight:700;color:rgba(255,255,255,.92)}
-.tag b{color:#fff}
-.btn{
-  border:0;border-radius:16px;font-family:inherit;font-weight:700;font-size:16px;
-  padding:16px 20px;cursor:pointer;width:100%;transition:transform .12s ease,filter .2s ease;
-}
+:root{--red:#D80019;--red-deep:#A80014;--ink:#1C2430;--slate:#5A6472;--mist:#F4F6F8;--line:#E4E8ED;--coral:#F26D6D;--teal:#12B5A5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);line-height:1.6}
+.script{font-family:'Pacifico',cursive}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.btn{display:inline-block;border:0;border-radius:14px;font:inherit;font-weight:700;font-size:15px;padding:13px 24px;cursor:pointer;transition:transform .12s,filter .2s}
 .btn:active{transform:scale(.97)}
-.btn-primary{background:var(--red);color:#fff;box-shadow:0 8px 20px rgba(216,0,25,.32)}
-.btn-coral{background:var(--coral);color:#fff;box-shadow:0 8px 20px rgba(242,109,109,.36)}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{filter:brightness(1.08)}
 .btn-white{background:#fff;color:var(--red)}
-.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}
 .btn-dark{background:var(--ink);color:#fff}
-.btn-sm{padding:11px 16px;font-size:14px;border-radius:12px;width:auto}
-.link{background:none;border:0;color:inherit;font:inherit;cursor:pointer;text-decoration:underline;opacity:.9}
 
-/* Header bar (in-app) */
-.appbar{
-  background:var(--red);color:#fff;padding:16px 18px 14px;
-  display:flex;align-items:center;gap:12px;flex-shrink:0;
-  padding-top:calc(16px + env(safe-area-inset-top,0px));
-}
-.appbar .script{font-size:26px}
-.appbar h2{font-size:19px;font-weight:800;letter-spacing:.3px}
-.appbar .back{background:rgba(255,255,255,.16);border:0;color:#fff;width:34px;height:34px;border-radius:11px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.appbar .spacer{flex:1}
+/* ---- top nav with USER LOGIN ---- */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo img{width:38px;height:38px;border-radius:10px}
+.logo .script{font-size:26px;color:var(--red)}
+.nav-links{display:flex;align-items:center;gap:28px;font-weight:600;font-size:15px}
+.nav-links a{color:var(--slate)}.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.login-link{font-weight:700;color:var(--ink)}
+@media(max-width:760px){.nav-links{display:none}}
 
-/* Chips */
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{
-  border:1.5px solid var(--line);background:#fff;color:var(--slate);
-  border-radius:999px;padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;
-  transition:all .15s ease;user-select:none;
-}
-.chip.on{background:var(--red);border-color:var(--red);color:#fff}
-.chip.diet.on{background:var(--teal);border-color:var(--teal)}
-.chip-static{background:var(--mist);border:0;color:var(--slate);border-radius:999px;padding:5px 11px;font-size:11.5px;font-weight:700}
-.chip-static.hot{background:#FFE9E9;color:var(--red)}
-.chip-static.teal{background:#DFF6F3;color:#0C8073}
+/* ---- hero ---- */
+.hero{background:linear-gradient(160deg,var(--red),var(--red-deep));color:#fff;padding:80px 0 90px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative;z-index:2}
+.hero h1{font-size:56px;font-weight:900;line-height:1.05;letter-spacing:-1px}
+.hero .tag{letter-spacing:3px;font-size:13px;font-weight:800;opacity:.9;margin-bottom:18px}
+.hero p.sub{font-size:19px;opacity:.95;margin:20px 0 30px;max-width:460px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.store-badges{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.store-badges .b{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 16px;font-size:13px;display:flex;align-items:center;gap:8px}
+.phone-mock{justify-self:center;width:280px;height:570px;background:#000;border-radius:38px;padding:10px;box-shadow:0 40px 80px rgba(0,0,0,.4);border:2px solid rgba(255,255,255,.15)}
+.phone-mock iframe{width:100%;height:100%;border:0;border-radius:30px;background:#fff}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr;text-align:center}.hero h1{font-size:42px}.hero-cta,.store-badges{justify-content:center}.phone-mock{display:none}}
 
-/* Field */
-.field{margin-bottom:16px}
-.field label{display:block;font-size:12.5px;font-weight:700;color:var(--slate);margin-bottom:7px;letter-spacing:.2px}
-.field input,.field select{
-  width:100%;border:1.5px solid var(--line);border-radius:13px;padding:14px;font:inherit;font-size:15px;color:var(--ink);background:#fff;
-}
-.field input:focus,.field select:focus{outline:none;border-color:var(--coral)}
+/* ---- how it works ---- */
+section{padding:80px 0}
+.sec-head{text-align:center;max-width:640px;margin:0 auto 54px}
+.sec-head h2{font-size:38px;font-weight:800;letter-spacing:-.5px}
+.sec-head p{font-size:18px;color:var(--slate);margin-top:12px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.step{text-align:center;padding:28px 18px;border:1px solid var(--line);border-radius:22px;background:#fff}
+.step .n{width:54px;height:54px;border-radius:50%;background:#FFECEC;color:var(--red);font-size:26px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.step h3{font-size:17px;font-weight:800;margin-bottom:6px}
+.step p{font-size:14px;color:var(--slate)}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
 
-/* progress */
-.prog{height:5px;background:rgba(255,255,255,.28);border-radius:3px;overflow:hidden;margin:2px 0 0}
-.prog.dark{background:var(--mist)}
-.prog i{display:block;height:100%;background:#fff;border-radius:3px;transition:width .4s ease}
-.prog.dark i{background:var(--coral)}
+/* ---- features ---- */
+.features{background:var(--mist)}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.fcard{background:#fff;border-radius:20px;padding:28px;border:1px solid var(--line)}
+.fcard .ic{font-size:32px;margin-bottom:14px}
+.fcard h3{font-size:18px;font-weight:800;margin-bottom:8px}
+.fcard p{font-size:14.5px;color:var(--slate)}
+@media(max-width:860px){.fgrid{grid-template-columns:1fr}}
 
-/* ---------- Onboarding slides ---------- */
-.ob{position:absolute;inset:0;display:none;flex-direction:column;justify-content:space-between;padding:0;background:var(--red)}
-.ob.active{display:flex;animation:fade .4s ease}
-@keyframes fade{from{opacity:0}to{opacity:1}}
+/* ---- CTA band ---- */
+.cta-band{background:linear-gradient(135deg,var(--ink),#2b3546);color:#fff;text-align:center}
+.cta-band h2{font-size:36px;font-weight:800}
+.cta-band p{font-size:18px;opacity:.85;margin:12px 0 28px}
 
-/* ---------- Swipe deck ---------- */
-#deck{flex:1;position:relative;padding:14px 14px 0}
-.card{
-  position:absolute;inset:14px 14px 0;border-radius:24px;overflow:hidden;
-  background:#333;box-shadow:var(--shadow-lg);will-change:transform;
-  display:flex;flex-direction:column;justify-content:flex-end;
-}
-.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.card .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.35) 42%,rgba(0,0,0,0) 68%)}
-.card .body{position:relative;padding:18px 20px 20px;color:#fff}
-.card .name{font-size:25px;font-weight:800;display:flex;align-items:center;gap:8px}
-.card .name .vf{font-size:15px;color:#4FC3F7}
-.card .meta{font-size:13.5px;opacity:.92;margin:4px 0 10px;display:flex;gap:12px;flex-wrap:wrap}
-.card .prompt{background:rgba(255,255,255,.14);backdrop-filter:blur(4px);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:11px;border:1px solid rgba(255,255,255,.15)}
-.card .prompt b{display:block;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;opacity:.75;margin-bottom:2px}
-.card .cui{display:flex;flex-wrap:wrap;gap:6px}
-.card .cui span{background:rgba(255,255,255,.2);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600}
-.card .cui span.shared{background:var(--teal);box-shadow:0 0 0 2px rgba(255,255,255,.25)}
-.stamp{position:absolute;top:26px;font-size:30px;font-weight:800;letter-spacing:2px;padding:6px 16px;border-radius:12px;border:4px solid;opacity:0;transform:rotate(-14deg);z-index:5}
-.stamp.like{left:20px;color:var(--teal);border-color:var(--teal)}
-.stamp.nope{right:20px;color:var(--coral);border-color:var(--coral)}
-.match-badge{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:6;background:var(--teal);color:#fff;font-size:11px;font-weight:800;letter-spacing:.5px;padding:6px 13px;border-radius:999px;box-shadow:0 6px 14px rgba(18,181,165,.4)}
-#deckEmpty{position:absolute;inset:14px 14px 0;border-radius:24px;background:var(--mist);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;color:var(--slate)}
-
-/* deck action bar */
-.actions{display:flex;gap:14px;align-items:center;justify-content:center;padding:16px 0 8px}
-.act{border:0;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;background:#fff;box-shadow:var(--shadow);transition:transform .12s}
-.act:active{transform:scale(.9)}
-.act.sm{width:50px;height:50px;font-size:20px}
-.act.lg{width:64px;height:64px;font-size:26px}
-.act.nope{color:var(--coral)} .act.like{color:var(--teal)} .act.star{color:var(--gold)} .act.rewind{color:#7C8698}
-
-/* bottom nav */
-.tabbar{
-  display:flex;background:#fff;border-top:1px solid var(--line);flex-shrink:0;
-  padding-bottom:var(--safe-b);
-}
-.tabbar button{flex:1;background:none;border:0;padding:11px 0 10px;cursor:pointer;color:#9AA3B0;font-size:22px;position:relative;display:flex;flex-direction:column;align-items:center;gap:2px}
-.tabbar button span{font-size:10px;font-weight:700}
-.tabbar button.on{color:var(--red)}
-.tabbar button .dot{position:absolute;top:6px;right:calc(50% - 18px);background:var(--coral);color:#fff;font-size:9px;font-weight:800;min-width:16px;height:16px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
-
-/* Match overlay */
-#matchOverlay{position:absolute;inset:0;z-index:60;background:linear-gradient(160deg,var(--red),var(--red-dark));display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;color:#fff}
-#matchOverlay.show{display:flex;animation:fade .35s}
-.match-photos{display:flex;justify-content:center;margin:8px 0 20px}
-.match-photos .mp{width:118px;height:118px;border-radius:50%;border:4px solid #fff;object-fit:cover;box-shadow:var(--shadow-lg)}
-.match-photos .mp:last-child{margin-left:-26px}
-.confetti{position:absolute;width:9px;height:14px;border-radius:2px;top:-20px;animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(120vh) rotate(540deg);opacity:.2}}
-
-/* explore cards */
-.vcard{display:flex;gap:12px;border:1px solid var(--line);border-radius:18px;padding:11px;margin-bottom:13px;cursor:pointer;background:#fff;transition:transform .12s,box-shadow .2s}
-.vcard:active{transform:scale(.99)}
-.vcard img{width:92px;height:92px;border-radius:13px;object-fit:cover;flex-shrink:0}
-.vcard .vc{flex:1;min-width:0}
-.vcard .vn{font-weight:800;font-size:15.5px}
-.vcard .vsub{font-size:12.5px;color:var(--slate);margin:2px 0 7px;display:flex;gap:9px;flex-wrap:wrap}
-.rowb{display:flex;gap:6px;flex-wrap:wrap}
-.offer{background:var(--red);color:#fff;font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:7px;letter-spacing:.2px}
-
-/* section head */
-.shead{display:flex;align-items:baseline;justify-content:space-between;margin:4px 0 12px}
-.shead h3{font-size:17px;font-weight:800}
-.shead .more{color:var(--coral);font-size:13px;font-weight:700;cursor:pointer;background:none;border:0}
-
-/* chat list */
-.crow{display:flex;gap:13px;align-items:center;padding:13px 4px;border-bottom:1px solid var(--mist);cursor:pointer}
-.crow img{width:56px;height:56px;border-radius:50%;object-fit:cover}
-.crow .ci{flex:1;min-width:0}
-.crow .cn{font-weight:700;font-size:15px;display:flex;justify-content:space-between}
-.crow .cn small{font-weight:500;color:#9AA3B0;font-size:11px}
-.crow .cm{font-size:13px;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
-.crow .badge{background:var(--coral);color:#fff;font-size:10px;font-weight:800;min-width:19px;height:19px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
-
-/* chat thread */
-#thread{flex:1;overflow-y:auto;padding:16px;background:#FAFBFC;display:flex;flex-direction:column;gap:9px}
-.bub{max-width:78%;padding:11px 14px;border-radius:16px;font-size:14px;line-height:1.4}
-.bub.them{background:#fff;border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:5px}
-.bub.me{background:var(--ink);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
-.bub.venue{align-self:flex-start;padding:0;overflow:hidden;background:#fff;border:1px solid var(--line);width:80%;border-radius:16px}
-.bub.venue img{width:100%;height:96px;object-fit:cover;display:block}
-.bub.venue .vb{padding:10px 12px}
-.bub.venue .vb b{font-size:14px}
-.bub.venue .vb p{font-size:11.5px;color:var(--slate);margin:2px 0 8px}
-.typing{align-self:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;border-bottom-left-radius:5px;padding:13px 16px;display:flex;gap:4px}
-.typing i{width:7px;height:7px;border-radius:50%;background:#B7BFC9;animation:blink 1.2s infinite}
-.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
-@keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
-.ice{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;background:#fff;border-top:1px solid var(--mist)}
-.ice::-webkit-scrollbar{height:0}
-.ice button{white-space:nowrap;background:#FFE9E9;color:var(--red);border:0;border-radius:999px;padding:9px 14px;font-size:12.5px;font-weight:700;cursor:pointer;flex-shrink:0}
-.composer{display:flex;gap:9px;align-items:center;padding:11px 14px;border-top:1px solid var(--line);background:#fff;padding-bottom:calc(11px + var(--safe-b))}
-.composer input{flex:1;border:1.5px solid var(--line);border-radius:999px;padding:12px 16px;font:inherit;font-size:14px}
-.composer input:focus{outline:none;border-color:var(--coral)}
-.composer .send{background:var(--red);color:#fff;border:0;width:44px;height:44px;border-radius:50%;font-size:18px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.composer .share{background:#fff;color:var(--red);border:1.5px solid var(--red);width:44px;height:44px;border-radius:50%;font-size:19px;cursor:pointer;flex-shrink:0}
-
-/* venue detail */
-#vdImg{width:100%;height:230px;object-fit:cover}
-.vdhead{padding:18px 20px 0}
-.vdhead h2{font-size:23px;font-weight:800}
-.vdrow{display:flex;align-items:center;gap:7px;color:var(--slate);font-size:13.5px;margin-top:6px}
-.info-line{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--mist);font-size:14px}
-.info-line .ic{font-size:18px;width:24px;text-align:center}
-.info-line b{display:block;font-size:12px;color:var(--slate);font-weight:700;margin-bottom:2px}
-
-/* booking */
-.seg{display:flex;gap:9px;overflow-x:auto;padding-bottom:4px}
-.seg::-webkit-scrollbar{height:0}
-.datep{flex-shrink:0;border:1.5px solid var(--line);border-radius:14px;padding:11px 15px;text-align:center;cursor:pointer;min-width:60px}
-.datep.on{background:var(--teal);border-color:var(--teal);color:#fff}
-.datep b{display:block;font-size:11px;opacity:.8}.datep span{font-size:19px;font-weight:800}
-.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.slot{border:1.5px solid var(--line);border-radius:12px;padding:12px 0;text-align:center;font-size:13.5px;font-weight:700;cursor:pointer;color:var(--slate)}
-.slot.on{background:var(--red);border-color:var(--red);color:#fff}
-.slot.off{opacity:.4;pointer-events:none}
-.stepper{display:flex;align-items:center;gap:18px}
-.stepper button{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--coral);background:#fff;color:var(--coral);font-size:20px;font-weight:700;cursor:pointer}
-.stepper span{font-size:20px;font-weight:800;min-width:24px;text-align:center}
-
-/* profile */
-.pfhero{position:relative}
-.pfhero img{width:100%;height:250px;object-fit:cover}
-.pfhero .grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 55%)}
-.pfhero .nm{position:absolute;bottom:16px;left:20px;color:#fff}
-.pfhero .nm h2{font-size:24px;font-weight:800}
-.tier{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#F6D488,#D9A441);color:#5C4008;font-weight:800;font-size:12px;padding:5px 12px;border-radius:999px;margin-top:6px}
-.menu-row{display:flex;align-items:center;gap:14px;padding:16px 4px;border-bottom:1px solid var(--mist);font-size:15px;font-weight:600;cursor:pointer}
-.menu-row .ic{font-size:20px;width:26px;text-align:center}
-.menu-row .ar{margin-left:auto;color:#C4CBD4}
-
-/* plans */
-.plan{border:2px solid var(--line);border-radius:20px;padding:20px;margin-bottom:15px;position:relative}
-.plan.gold{border-color:var(--gold);background:linear-gradient(180deg,#FFFBF2,#fff)}
-.plan .pt{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--slate)}
-.plan.gold .pt{color:#B8860B}
-.plan .pp{font-size:32px;font-weight:800;margin:6px 0 3px}
-.plan .pp small{font-size:14px;font-weight:600;color:var(--slate)}
-.plan ul{list-style:none;margin:14px 0 0}
-.plan li{font-size:13.5px;padding:6px 0 6px 26px;position:relative;color:var(--ink)}
-.plan li:before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:800}
-.plan .rec{position:absolute;top:-11px;right:18px;background:var(--gold);color:#fff;font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:999px;letter-spacing:.5px}
-
-.toast{position:absolute;bottom:calc(80px + var(--safe-b));left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:14px;font-size:13.5px;font-weight:600;opacity:0;transition:all .3s;z-index:70;white-space:nowrap;box-shadow:var(--shadow)}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-.muted{color:var(--slate)}
-.h-sub{font-size:13px;color:var(--slate);line-height:1.5}
-h1.big{font-size:29px;font-weight:800;line-height:1.15}
-.divide{height:1px;background:var(--mist);margin:16px 0}
-.safety{background:#FFF6F6;border:1px solid #F8D7D7;border-radius:14px;padding:14px 16px;font-size:12.5px;color:var(--red-dark);line-height:1.55}
-.pill-toggle{display:flex;background:var(--mist);border-radius:12px;padding:4px;margin-bottom:14px}
-.pill-toggle button{flex:1;border:0;background:none;padding:9px;border-radius:9px;font:inherit;font-weight:700;font-size:13.5px;color:var(--slate);cursor:pointer}
-.pill-toggle button.on{background:#fff;color:var(--red);box-shadow:0 2px 6px rgba(0,0,0,.08)}
-
-/* explore search */
-.searchwrap{padding:12px 16px 14px;border-bottom:1px solid var(--mist);flex-shrink:0;background:#fff}
-.searchbar{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:14px;padding:4px 4px 4px 12px;background:#fff}
-.searchbar input{flex:1;border:0;font:inherit;font-size:14px;padding:9px 0;outline:none}
-.sbtn{background:var(--red);color:#fff;border:0;border-radius:11px;padding:10px 14px;font:inherit;font-weight:700;font-size:13px;cursor:pointer;flex-shrink:0}
-.radius-row{display:flex;align-items:center;gap:12px;margin:12px 0 10px}
-input[type=range]{-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;background:var(--mist)}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--red);cursor:pointer;box-shadow:0 2px 6px rgba(216,0,25,.4)}
-input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radius:50%;background:var(--red);cursor:pointer}
-
-/* map */
-.mapbox{position:relative;width:100%;height:420px;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#E8EDF2,#DDE6EC);border:1px solid var(--line)}
-.mapgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(150,165,180,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(150,165,180,.25) 1px,transparent 1px);background-size:38px 38px}
-.mapbox:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(18,181,165,.08),transparent 60%)}
-.pin{position:absolute;transform:translate(-50%,-100%);background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;z-index:2}
-.pin .pindot{width:32px;height:32px;border-radius:50% 50% 50% 2px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 4px 10px rgba(0,0,0,.28);transform:rotate(0)}
-.pin .pinlbl{font-size:10px;font-weight:700;background:#fff;padding:2px 6px;border-radius:6px;margin-top:3px;box-shadow:0 2px 5px rgba(0,0,0,.12);white-space:nowrap}
-.pin.me{z-index:1}.pin.me .pindot{background:var(--ink)}
-
-/* group meet-ups */
-.gcard{border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:14px}
-.gcard .gtop{height:96px;position:relative;display:flex;align-items:flex-end;padding:12px}
-.gcard .gtop .gv{color:#fff;font-weight:800;font-size:15px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
-.gcard .gbody{padding:13px 15px}
-.gcard .gmeta{font-size:12.5px;color:var(--slate);display:flex;gap:12px;flex-wrap:wrap;margin-bottom:9px}
-.avstack{display:flex}
-.avstack img{width:30px;height:30px;border-radius:50%;border:2px solid #fff;object-fit:cover;margin-left:-8px}
-.avstack img:first-child{margin-left:0}
-.avstack .more{width:30px;height:30px;border-radius:50%;border:2px solid #fff;background:var(--coral);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-left:-8px}
-
-/* video call */
-#callScreen{position:absolute;inset:0;background:#12141a;z-index:85;display:none;flex-direction:column}
-#callScreen.show{display:flex}
-.callmain{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.callmain img{width:100%;height:100%;object-fit:cover;filter:brightness(.85)}
-.callself{position:absolute;bottom:18px;right:16px;width:96px;height:132px;border-radius:14px;overflow:hidden;border:2px solid rgba(255,255,255,.5);box-shadow:var(--shadow-lg)}
-.callself img{width:100%;height:100%;object-fit:cover}
-.callinfo{position:absolute;top:calc(20px + env(safe-area-inset-top,0px));left:0;right:0;text-align:center;color:#fff}
-.callinfo h3{font-size:20px;font-weight:800}.callinfo p{font-size:13px;opacity:.8;margin-top:3px}
-.callbar{display:flex;justify-content:center;gap:18px;padding:22px 0 calc(28px + var(--safe-b))}
-.callbtn{width:58px;height:58px;border-radius:50%;border:0;font-size:23px;cursor:pointer;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.16);color:#fff}
-.callbtn.end{background:#E23B3B}
-.callbadge{position:absolute;top:calc(70px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:rgba(18,181,165,.9);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:999px}
-
-/* safety toolkit */
-.safety-tile{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:15px;padding:14px;margin-bottom:11px}
-.safety-tile .st-ic{width:42px;height:42px;border-radius:12px;background:#FFF0F0;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.safety-tile b{font-size:14.5px}.safety-tile p{font-size:12.5px;color:var(--slate);margin-top:2px;line-height:1.45}
-.safety-tile .sw{margin-left:auto;align-self:center}
-.switch{width:44px;height:26px;border-radius:13px;background:var(--line);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
-.switch.on{background:var(--teal)}
-.switch i{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
-.switch.on i{left:21px}
+/* ---- footer with PARTNER LINKS ---- */
+footer{background:var(--ink);color:#cdd4dd;padding:56px 0 30px;font-size:14.5px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px}
+.foot-grid h4{color:#fff;font-size:14px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+.foot-grid a{display:block;color:#aeb6c1;margin-bottom:9px}
+.foot-grid a:hover{color:#fff}
+.foot-brand .script{font-size:28px;color:#fff}
+.foot-brand p{margin-top:10px;max-width:280px;color:#8b95a3}
+.foot-bottom{border-top:1px solid #2e3947;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:#8b95a3;font-size:13px}
+.partner-badge{display:inline-block;background:#2e3947;color:#fff;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;margin-left:8px}
+@media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}}
 </style>
 </head>
 <body>
-<div id="device">
-  <div id="screens"></div>
-  <div class="toast" id="toast"></div>
-</div>
 
-<script src="venues.js"></script>
-<script>
-
-// ---- Sample data ---------------------------------------------------
-const CUISINES = ["Italian","Indian","Japanese","Lebanese","Chinese","Thai","Mexican","French","Korean","Turkish","Greek","Spanish","Vietnamese","Ethiopian"];
-const DIETS = ["Halal","Kosher","Vegan","Vegetarian","Gluten-free","Pescatarian"];
-
-const me = { name:"You", cuisines:["Italian","Japanese","Lebanese"], diets:["Halal"] };
-
-const FOODIES = [
-  {id:1,name:"Amara",age:27,dist:"1.2 mi",looking:"Relationship",verified:true,
-   img:"img/p4.jpg",
-   cuisines:["Italian","Lebanese","Thai"],
-   prompt:{q:"My go-to comfort dish",a:"A proper bowl of cacio e pepe on a rainy night."}},
-  {id:2,name:"Priya",age:29,dist:"0.8 mi",looking:"Something casual",verified:true,
-   img:"img/p1.jpg",
-   cuisines:["Indian","Japanese","Korean"],
-   prompt:{q:"Order for the table or your own?",a:"Order for the table — always. Sharing is the whole point."}},
-  {id:3,name:"Sofia",age:25,dist:"2.4 mi",looking:"Relationship",verified:false,
-   img:"img/p16.jpg",
-   cuisines:["Japanese","Italian","French"],
-   prompt:{q:"Best meal you've had this year",a:"Omakase in Soho. I still think about the uni."}},
-  {id:4,name:"Leila",age:31,dist:"3.1 mi",looking:"New friends",verified:true,
-   img:"img/p13.jpg",
-   cuisines:["Lebanese","Turkish","Greek"],
-   prompt:{q:"Sweet or savoury?",a:"Both, at once, no notes. Baklava counts as breakfast."}},
-  {id:5,name:"Chloé",age:26,dist:"1.9 mi",looking:"Relationship",verified:true,
-   img:"img/p8.jpg",
-   cuisines:["French","Italian","Spanish"],
-   prompt:{q:"Dream dinner guest",a:"Someone who'll split a bottle and stay for dessert."}}
-];
-
-// Full London dataset from venues.js — normalise fields the app expects
-const MY_LOC = {lat:51.5074,lng:-0.1278,label:"Central London"}; // default "me" location
-function haversineMi(a,b){const R=3959;const dLat=(b.lat-a.lat)*Math.PI/180,dLng=(b.lng-a.lng)*Math.PI/180;const la1=a.lat*Math.PI/180,la2=b.lat*Math.PI/180;const x=Math.sin(dLat/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dLng/2)**2;return R*2*Math.asin(Math.sqrt(x));}
-const VENUES = (window.LONDON_VENUES||[]).map(v=>({
-  ...v,
-  area:v.area+", London",
-  addr:v.area+" · "+v.postcode,
-  dist:haversineMi(MY_LOC,{lat:v.lat,lng:v.lng}).toFixed(1)+" mi",
-  distMi:haversineMi(MY_LOC,{lat:v.lat,lng:v.lng})
-}));
-
-// shared-cuisine helper
-const shared = (a,b)=>a.filter(c=>b.includes(c));
-
-// ---- App state -----------------------------------------------------
-const state = {
-  step:0,             // onboarding step
-  selCuisines:[...me.cuisines],
-  selDiets:[...me.diets],
-  deckIdx:0,
-  lastSwiped:null,
-  matches:[],         // foodie objects matched
-  activeChat:null,
-  threads:{},         // id -> [{who,text,venue}]
-  bookingVenue:null,
-  bookDate:0,bookSlot:null,bookGuests:2,
-  tab:"discover",
-  tier:"free",
-  radius:5, exFilter:"all", exDiets:[], exView:"list", searchCentre:null, searchLabel:null,
-  groups:[]
-};
-
-// seed one existing match + chat so the app isn't empty
-state.matches.push(FOODIES[1]);
-state.threads[FOODIES[1].id]=[
-  {who:"them",text:"Hey! Saw we both can't say no to Japanese 🍣"},
-  {who:"me",text:"Guilty. Omakase or ramen person?"},
-  {who:"them",text:"Both, obviously. Where are you thinking?"}
-];
-
-const $=(s,r=document)=>r.querySelector(s);
-const screensEl=$("#screens");
-
-function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),1900);}
-
-// ---- Screen router -------------------------------------------------
-const routes={};
-function route(name,builder){routes[name]=builder;}
-let current=null;
-function go(name,opts){
-  const html=routes[name](opts||{});
-  let el=document.createElement("div");
-  el.className="screen"+(routes[name].red?" red-bg":"");
-  el.innerHTML=html;
-  el.id="scr-"+name;
-  // remove old same-id
-  const old=$("#scr-"+name);if(old)old.remove();
-  screensEl.appendChild(el);
-  requestAnimationFrame(()=>{
-    document.querySelectorAll(".screen.active").forEach(s=>{if(s!==el)s.classList.remove("active")});
-    el.classList.add("active");
-  });
-  if(routes[name].after)routes[name].after(el,opts||{});
-  current=name;
-  setTimeout(()=>{document.querySelectorAll(".screen").forEach(s=>{if(!s.classList.contains("active")&&s!==el)s.remove();});},400);
-}
-
-/* =========================================================
-   ONBOARDING
-   ========================================================= */
-route("welcome",()=>`
-  <div class="center" style="flex:1;padding:40px 30px">
-    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">
-      <div class="brandmark" style="font-size:64px">Foodies</div>
-      <div class="tag" style="margin-top:10px">LOVE <b>FOOD</b> . LOVE <b>LIFE</b></div>
-      <p style="color:#fff;font-size:20px;font-weight:600;margin-top:46px;opacity:.95">Are you hungry<br>for love?</p>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/"><img src="favicon.png" alt="Find Foodies"><span class="script">Foodies</span></a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#download">Get the app</a>
+    </nav>
+    <!-- USER LOGIN AT THE TOP -->
+    <div class="nav-cta">
+      <a href="/app/" class="login-link">Log in</a>
+      <a href="/app/" class="btn btn-red">Join free</a>
     </div>
-    <div style="width:100%">
-      <button class="btn btn-white" onclick="go('signup')">Get started</button>
-      <button class="link" style="color:#fff;margin-top:18px;width:100%" onclick="go('signup')">I already have an account</button>
-    </div>
-  </div>`);
-routes.welcome.red=true;
+  </div>
+</header>
 
-route("signup",()=>`
-  <div class="scroll center red-bg" style="padding:44px 30px">
-    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%">
-      <div class="brandmark" style="font-size:44px">Foodies</div>
-      <div class="tag" style="margin:8px 0 40px">LOVE <b>FOOD</b> . LOVE <b>LIFE</b></div>
-      <p style="color:#fff;font-size:12px;letter-spacing:2px;font-weight:700;margin-bottom:18px">SIGN UP WITH</p>
-      <button class="btn btn-white" style="margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px" onclick="googleSignup()">
-        <span style="font-size:17px">🔴</span> Continue with Google</button>
-      <button class="btn btn-white" style="margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px" onclick="appleSignup()">
-        <span style="font-size:18px"></span> Continue with Apple</button>
-      <button class="btn btn-white" style="margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px" onclick="startOnboard()">
-        <span style="font-size:18px">📷</span> Continue with Instagram</button>
-      <button class="btn btn-white" style="margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px" onclick="startOnboard()">
-        <span style="color:#1877F2;font-size:18px">f</span> Continue with Facebook</button>
-      <button class="btn btn-ghost" style="display:flex;align-items:center;justify-content:center;gap:10px" onclick="startOnboard()">
-        ✉️ Use your email</button>
-    </div>
-    <p style="color:rgba(255,255,255,.7);font-size:11px;margin-top:26px;line-height:1.5">By continuing you agree to our Terms and Privacy Policy</p>
-  </div>`);
-routes.signup.red=true;
-
-/* ---- Demo Google sign-up (looks like real OAuth; real flow needs a backend) ---- */
-function googleSignup(){go("google");}
-function appleSignup(){toast("Apple sign-in — demo");startOnboard();}
-route("google",()=>`
-  <div class="scroll" style="background:#fff;padding:0">
-    <div style="max-width:400px;margin:0 auto;padding:28px 24px">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:28px">
-        <svg width="24" height="24" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        <span style="font-size:15px;color:#5f6368">Sign in with Google</span>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="tag">LOVE FOOD . LOVE LIFE</div>
+      <h1>Dating that starts<br>with dinner.</h1>
+      <p class="sub">Find Foodies matches you on the food you love — then helps you find the perfect place to eat together. No more "where shall we go?"</p>
+      <div class="hero-cta">
+        <a href="/app/" class="btn btn-white">Join free — founding member</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
       </div>
-      <h2 style="font-size:24px;font-weight:400;color:#202124;margin-bottom:6px">Choose an account</h2>
-      <p style="font-size:14px;color:#5f6368;margin-bottom:24px">to continue to <b style="font-weight:500">Find Foodies</b></p>
-      <div style="border:1px solid #dadce0;border-radius:8px;overflow:hidden">
-        ${[{n:"Alex Morgan",e:"alex.morgan@gmail.com",c:"#DB4437"},{n:"Sam Taylor",e:"sam.taylor@gmail.com",c:"#4285F4"}].map(a=>`
-          <div onclick="googlePicked('${a.n}')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;border-bottom:1px solid #f1f3f4" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='#fff'">
-            <div style="width:34px;height:34px;border-radius:50%;background:${a.c};color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500">${a.n[0]}</div>
-            <div><div style="font-size:14px;color:#202124;font-weight:500">${a.n}</div><div style="font-size:13px;color:#5f6368">${a.e}</div></div>
-          </div>`).join("")}
-        <div onclick="startOnboard()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='#fff'">
-          <div style="width:34px;height:34px;border-radius:50%;border:1px solid #dadce0;display:flex;align-items:center;justify-content:center;color:#5f6368">+</div>
-          <div style="font-size:14px;color:#202124">Use another account</div>
-        </div>
-      </div>
-      <p style="font-size:12px;color:#5f6368;line-height:1.6;margin-top:24px">To continue, Google will share your name, email address and profile picture with Find Foodies. <span style="color:#1a73e8">Privacy Policy</span> and <span style="color:#1a73e8">Terms</span>.</p>
-      <div style="display:flex;justify-content:space-between;margin-top:26px">
-        <button class="link" style="color:#1a73e8;text-decoration:none;font-weight:500;font-size:14px" onclick="go('signup')">Cancel</button>
-      </div>
-      <p style="font-size:11px;color:#9aa0a6;margin-top:30px;text-align:center;border-top:1px solid #f1f3f4;padding-top:14px">Demo sign-in — a real Google login connects to your backend.</p>
-    </div>
-  </div>`);
-function googlePicked(name){me.name=name.split(" ")[0];toast("Signed in as "+name);startOnboard();}
-
-// onboarding flow container
-const OB_STEPS=["details","cuisine","diet","photos","done"];
-function startOnboard(){state.step=0;go("onboard");}
-function obNext(){state.step++;if(state.step>=OB_STEPS.length){enterApp();return;}go("onboard");}
-function obBack(){if(state.step===0){go("signup");return;}state.step--;go("onboard");}
-
-route("onboard",()=>{
-  const step=OB_STEPS[state.step];
-  const pct=((state.step)/(OB_STEPS.length-1))*100;
-  let inner="";
-  if(step==="details"){
-    inner=`
-      <h1 class="big" style="margin-bottom:6px">Tell us a little<br>about you</h1>
-      <p class="h-sub" style="margin-bottom:22px">This helps us find your most compatible, local matches.</p>
-      <div class="field"><label>First name</label><input placeholder="e.g. Alex" value=""></div>
-      <div class="field"><label>Location</label><input placeholder="Select within UK" value="London"></div>
-      <div class="field"><label>I am a</label>
-        <select><option>Woman</option><option>Man</option><option>Non-binary</option></select></div>
-      <div class="field"><label>Looking for</label>
-        <select><option>Relationship</option><option>Something casual</option><option>New friends</option><option>Dinner company</option></select></div>`;
-  }else if(step==="cuisine"){
-    inner=`
-      <h1 class="big" style="margin-bottom:6px">What do you<br>love to eat?</h1>
-      <p class="h-sub" style="margin-bottom:20px">Pick your favourites — we match people who share your taste.</p>
-      <div class="chips" id="cuiChips">
-        ${CUISINES.map(c=>`<button class="chip ${state.selCuisines.includes(c)?'on':''}" onclick="toggleCui(this,'${c}')">${c}</button>`).join("")}
-      </div>`;
-  }else if(step==="diet"){
-    inner=`
-      <h1 class="big" style="margin-bottom:6px">Any dietary or<br>faith preferences?</h1>
-      <p class="h-sub" style="margin-bottom:20px">We'll only suggest venues that cater to you. Optional.</p>
-      <div class="chips">
-        ${DIETS.map(d=>`<button class="chip diet ${state.selDiets.includes(d)?'on':''}" onclick="toggleDiet(this,'${d}')">${d}</button>`).join("")}
-      </div>`;
-  }else if(step==="photos"){
-    inner=`
-      <h1 class="big" style="margin-bottom:6px">Add a few<br>photos</h1>
-      <p class="h-sub" style="margin-bottom:20px">And a verified selfie — every Foodie is checked, so matches are real and safe. <span style="color:var(--teal);font-weight:700">✓ Verification keeps the community genuine.</span></p>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-        ${[0,1,2,3,4,5].map(i=>`<div style="aspect-ratio:3/4;border-radius:14px;background:${i===0?'#ddd':'var(--mist)'};display:flex;align-items:center;justify-content:center;color:#B7BFC9;font-size:26px;border:2px dashed ${i===0?'transparent':'#D6DCE3'};overflow:hidden">${i===0?'<img src="img/p6.jpg" style="width:100%;height:100%;object-fit:cover">':'＋'}</div>`).join("")}
-      </div>
-      <div style="display:flex;align-items:center;gap:9px;margin-top:18px;color:var(--teal);font-weight:700;font-size:13.5px">
-        <span style="background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px">✓</span> Photo verified</div>`;
-  }else if(step==="done"){
-    inner=`<div class="center" style="flex:1;color:#fff">
-        <div class="brandmark" style="font-size:44px">Foodies</div>
-        <div class="tag" style="margin:8px 0 40px">LOVE <b>FOOD</b> . LOVE <b>LIFE</b></div>
-        <div class="script" style="font-size:40px;color:#fff">Good going!</div>
-        <p style="letter-spacing:3px;font-weight:700;margin-top:24px;font-size:14px">YOUR PROFILE IS<br>NOW COMPLETE</p>
-      </div>`;
-  }
-
-  if(step==="done"){
-    return `<div class="scroll red-bg center" style="padding:30px">
-      ${inner}
-      <button class="btn btn-white" style="margin-top:40px" onclick="obNext()">Find your Foodie →</button>
-    </div>`;
-  }
-  return `
-    <div class="appbar"><button class="back" onclick="obBack()">‹</button>
-      <div class="script">Foodies</div><div class="spacer"></div>
-      <span style="font-size:12px;font-weight:700;opacity:.85">${state.step+1}/4</span></div>
-    <div style="padding:0 22px"><div class="prog dark" style="margin:16px 0 4px"><i style="width:${pct}%"></i></div></div>
-    <div class="scroll pad">${inner}</div>
-    <div class="pad" style="padding-top:0"><button class="btn btn-coral" onclick="obNext()">Continue</button></div>`;
-});
-
-function toggleCui(el,c){el.classList.toggle("on");const i=state.selCuisines.indexOf(c);if(i<0)state.selCuisines.push(c);else state.selCuisines.splice(i,1);me.cuisines=state.selCuisines;}
-function toggleDiet(el,d){el.classList.toggle("on");const i=state.selDiets.indexOf(d);if(i<0)state.selDiets.push(d);else state.selDiets.splice(i,1);me.diets=state.selDiets;}
-
-/* =========================================================
-   MAIN APP SHELL + TABS
-   ========================================================= */
-function enterApp(){state.tab="discover";go("app");setTimeout(askNotifications,900);}
-
-route("app",()=>{
-  return `
-    <div id="tabContent" style="flex:1;display:flex;flex-direction:column;min-height:0"></div>
-    <div class="tabbar" id="tabbar">
-      <button data-tab="discover" onclick="switchTab('discover')">🔥<span>Discover</span></button>
-      <button data-tab="explore" onclick="switchTab('explore')">🍽️<span>Venues</span></button>
-      <button data-tab="groups" onclick="switchTab('groups')">👥<span>Meet-ups</span></button>
-      <button data-tab="chats" onclick="switchTab('chats')">💬<span>Chats</span></button>
-      <button data-tab="profile" onclick="switchTab('profile')">👤<span>Profile</span></button>
-    </div>`;
-});
-routes.app.after=()=>{switchTab(state.tab);};
-
-function switchTab(tab){
-  state.tab=tab;
-  document.querySelectorAll("#tabbar button").forEach(b=>b.classList.toggle("on",b.dataset.tab===tab));
-  const unread=Object.values(state.threads).filter(t=>t.some(m=>m.unread)).length;
-  const c=$("#tabContent");if(!c)return;
-  if(tab==="discover")c.innerHTML=tabDiscover();
-  if(tab==="explore"){c.innerHTML=tabExplore();renderExploreBody();}
-  if(tab==="groups")c.innerHTML=tabGroups();
-  if(tab==="chats")c.innerHTML=tabChats();
-  if(tab==="profile")c.innerHTML=tabProfile();
-  if(tab==="discover")initDeck();
-  // chat badge
-  const chatBtn=document.querySelector('#tabbar [data-tab="chats"]');
-  const oldDot=chatBtn.querySelector(".dot");if(oldDot)oldDot.remove();
-  const n=state.matches.filter(m=>!state.threads[m.id]||state.threads[m.id].length<=3).length;
-}
-
-/* ---------- DISCOVER (swipe deck) ---------- */
-function tabDiscover(){
-  return `
-    <div class="appbar"><div class="script" style="font-size:24px">Find your Foodie</div><div class="spacer"></div>
-      <button class="back" onclick="toast('Filters — demo')">⚙</button></div>
-    <div style="padding:10px 16px 0"><div style="background:#FFF3F3;border:1px solid #F8D7D7;border-radius:12px;padding:9px 13px;font-size:12px;color:var(--red-dark);display:flex;align-items:center;gap:8px">
-      <span style="font-size:15px">💡</span> Green tags are cuisines you <b>both</b> love — that's your match.</div></div>
-    <div id="deck"></div>
-    <div id="deckEmpty"><div style="font-size:40px;margin-bottom:12px">🍽️</div><b style="color:var(--ink);font-size:17px">That's everyone nearby</b><p style="margin-top:6px">Check back soon — new Foodies join every day.</p><button class="btn btn-coral btn-sm" style="margin-top:16px" onclick="resetDeck()">Start over</button></div>
-    <div class="actions">
-      <button class="act sm rewind" onclick="rewind()" title="Undo">↩</button>
-      <button class="act lg nope" onclick="swipe('left')">✕</button>
-      <button class="act sm star" onclick="swipe('super')">★</button>
-      <button class="act lg like" onclick="swipe('right')">♥</button>
-    </div>`;
-}
-function initDeck(){
-  const deck=$("#deck");if(!deck)return;
-  deck.innerHTML="";
-  const remaining=FOODIES.slice(state.deckIdx);
-  if(remaining.length===0){$("#deck").style.display="none";$("#deckEmpty").style.display="flex";return;}
-  $("#deck").style.display="block";$("#deckEmpty").style.display="none";
-  // render up to 3 stacked
-  remaining.slice(0,3).reverse().forEach((f)=>{
-    const sh=shared(me.cuisines,f.cuisines);
-    const isMatch=sh.length>=2;
-    const card=document.createElement("div");
-    card.className="card";card.dataset.id=f.id;
-    card.innerHTML=`
-      <img src="${f.img}" alt="${f.name}">
-      <div class="veil"></div>
-      ${isMatch?`<div class="match-badge">★ ${sh.length} shared cuisines</div>`:""}
-      <div class="stamp like">MATCH</div><div class="stamp nope">PASS</div>
-      <div class="body">
-        <div class="name">${f.name}, ${f.age} ${f.verified?'<span class="vf">✓</span>':''}</div>
-        <div class="meta"><span>📍 ${f.dist}</span><span>💘 ${f.looking}</span></div>
-        <div class="prompt"><b>${f.prompt.q}</b>${f.prompt.a}</div>
-        <div class="cui">${f.cuisines.map(c=>`<span class="${sh.includes(c)?'shared':''}">${c}</span>`).join("")}</div>
-      </div>`;
-    deck.appendChild(card);
-    if(f.id===remaining[0].id)attachDrag(card);
-  });
-}
-function topCard(){const deck=$("#deck");return deck?deck.lastElementChild:null;}
-function attachDrag(card){
-  let sx=0,sy=0,dx=0,dy=0,drag=false;
-  const like=card.querySelector(".stamp.like"),nope=card.querySelector(".stamp.nope");
-  const down=e=>{drag=true;const p=e.touches?e.touches[0]:e;sx=p.clientX;sy=p.clientY;card.style.transition="none";};
-  const move=e=>{if(!drag)return;const p=e.touches?e.touches[0]:e;dx=p.clientX-sx;dy=p.clientY-sy;
-    card.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/18}deg)`;
-    like.style.opacity=Math.max(0,dx/90);nope.style.opacity=Math.max(0,-dx/90);};
-  const up=()=>{if(!drag)return;drag=false;card.style.transition="transform .3s ease";
-    if(dx>95){finishSwipe(card,"right");}
-    else if(dx<-95){finishSwipe(card,"left");}
-    else{card.style.transform="";like.style.opacity=0;nope.style.opacity=0;}dx=0;dy=0;};
-  card.addEventListener("touchstart",down,{passive:true});card.addEventListener("touchmove",move,{passive:true});card.addEventListener("touchend",up);
-  card.addEventListener("mousedown",down);window.addEventListener("mousemove",move);window.addEventListener("mouseup",up);
-}
-function swipe(dir){const card=topCard();if(!card)return;finishSwipe(card,dir);}
-function finishSwipe(card,dir){
-  const id=+card.dataset.id;const f=FOODIES.find(x=>x.id===id);
-  state.lastSwiped=state.deckIdx;
-  const off=dir==="left"?-600:600;
-  card.style.transition="transform .35s ease";
-  card.style.transform=`translate(${dir==="left"?-off:off}px,-40px) rotate(${dir==="left"?-24:24}deg)`;
-  setTimeout(()=>{
-    state.deckIdx++;
-    if((dir==="right"||dir==="super")){
-      const sh=shared(me.cuisines,f.cuisines);
-      if(sh.length>=2){ // it's a match
-        if(!state.matches.find(m=>m.id===f.id))state.matches.unshift(f);
-        showMatch(f);
-        notify("It's a Match! 🎉",`You and ${f.name} both love ${shared(me.cuisines,f.cuisines).join(" & ")}. Say hello!`);
-      }else toast(dir==="super"?"Super like sent ★":"Liked ♥");
-    }
-    initDeck();
-  },320);
-}
-function rewind(){if(state.deckIdx>0){state.deckIdx--;initDeck();toast("Rewound ↩");}else toast("Nothing to undo");}
-function resetDeck(){state.deckIdx=0;initDeck();}
-
-/* ---------- MATCH overlay ---------- */
-function showMatch(f){
-  let ov=$("#matchOverlay");if(ov)ov.remove();
-  ov=document.createElement("div");ov.id="matchOverlay";ov.className="show";
-  const venues=bestVenuesFor(f);
-  ov.innerHTML=`
-    ${Array.from({length:18}).map(()=>{const c=['#fff','#F6D488','#F79A9A','#12B5A5'][Math.floor(Math.random()*4)];return `<span class="confetti" style="left:${Math.random()*100}%;background:${c};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()}s"></span>`}).join("")}
-    <div class="script" style="font-size:40px;color:#fff">It's a Match!</div>
-    <p style="opacity:.9;margin-top:6px;font-size:14px">You and ${f.name} both love ${shared(me.cuisines,f.cuisines).join(" & ")}</p>
-    <div class="match-photos">
-      <img class="mp" src="img/p6.jpg">
-      <img class="mp" src="${f.img}">
-    </div>
-    <div style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 16px;width:100%;max-width:320px;text-align:left">
-      <p style="font-size:11px;letter-spacing:1px;font-weight:700;opacity:.85;margin-bottom:8px">🍽️ WE SUGGEST — WORKS FOR YOU BOTH</p>
-      <div style="display:flex;gap:11px;align-items:center">
-        <img src="${venues[0].img}" style="width:52px;height:52px;border-radius:11px;object-fit:cover">
-        <div><b style="font-size:14px">${venues[0].name}</b><div style="font-size:11.5px;opacity:.85">${venues[0].cuisines.slice(0,2).join(", ")} · ${venues[0].dist}${venues[0].offer?" · 🎁 offer":""}</div></div>
+      <div class="store-badges">
+        <span class="b">▶ Google Play — coming soon</span>
+        <span class="b"> App Store — coming soon</span>
       </div>
     </div>
-    <button class="btn btn-white" style="max-width:320px;margin-top:22px" onclick="closeMatch(${f.id})">Send a message</button>
-    <button class="link" style="color:#fff;margin-top:16px" onclick="dismissMatch()">Keep swiping</button>`;
-  $("#device").appendChild(ov);
-}
-function dismissMatch(){const ov=$("#matchOverlay");if(ov){ov.classList.remove("show");setTimeout(()=>ov.remove(),300);}}
-function closeMatch(id){dismissMatch();openChat(id);}
+    <div class="phone-mock">
+      <iframe src="/app/" title="Find Foodies app preview" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
 
-/* ---------- venue matching logic (signature) ---------- */
-function bestVenuesFor(f){
-  const wantCui=[...new Set([...shared(me.cuisines,f.cuisines),...me.cuisines])];
-  const wantDiet=me.diets;
-  return [...VENUES].map(v=>{
-    let score=0;
-    v.cuisines.forEach(c=>{if(wantCui.includes(c))score+=wantCui.includes(c)&&shared(me.cuisines,f.cuisines).includes(c)?3:1;});
-    if(wantDiet.every(d=>v.diets.includes(d)))score+=2;
-    if(v.offer)score+=1;
-    return {...v,score};
-  }).sort((a,b)=>b.score-a.score);
-}
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>How Find Foodies works</h2>
+      <p>Four steps from hungry to happily matched.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">🍴</div><h3>Take the taste test</h3><p>A quick game builds your Taste Profile — spice, adventure, sweet tooth and more.</p></div>
+      <div class="step"><div class="n">💘</div><h3>Match on flavour</h3><p>We pair you with people who share your cuisines, with a live Flavour Match %.</p></div>
+      <div class="step"><div class="n">🍽️</div><h3>Find your place</h3><p>We suggest venues that suit you both — with offers from partner restaurants.</p></div>
+      <div class="step"><div class="n">🍰</div><h3>Book & meet</h3><p>Book a table in-app, meet face to face, and — obviously — order dessert.</p></div>
+    </div>
+  </div>
+</section>
 
-/* ---------- EXPLORE (venues) ---------- */
-function tabExplore(){
-  return `
-    <div class="appbar"><div class="script" style="font-size:24px">Explore venues</div><div class="spacer"></div>
-      <span style="font-size:12px;opacity:.85">${VENUES.length} in London</span></div>
-    <div class="searchwrap">
-      <div class="searchbar">
-        <span style="font-size:16px">📍</span>
-        <input id="pcInput" placeholder="Search postcode or area (e.g. E1, Soho)" onkeydown="if(event.key==='Enter')runSearch()">
-        <button onclick="runSearch()" class="sbtn">Search</button>
+<section id="features" class="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Why Foodies is different</h2>
+      <p>Not another swipe app. A food app that happens to match you with people.</p>
+    </div>
+    <div class="fgrid">
+      <div class="fcard"><div class="ic">🎯</div><h3>Flavour Match %</h3><p>Compatibility built on taste, not just photos. See how well your palates align before you say hello.</p></div>
+      <div class="fcard"><div class="ic">🍽️</div><h3>Real venues & offers</h3><p>Discover restaurants across your city with member offers, dietary filters, map search and one-tap booking.</p></div>
+      <div class="fcard"><div class="ic">🟢</div><h3>Eat Tonight</h3><p>See Foodies free to eat tonight near you. Spontaneous, no three-week text marathon.</p></div>
+      <div class="fcard"><div class="ic">🥂</div><h3>Meet-ups</h3><p>Join group dining tables — great for new friends and low-pressure evenings.</p></div>
+      <div class="fcard"><div class="ic">🛡️</div><h3>Safe by design</h3><p>Video dates before you meet, share-your-plan, meet in public venues, block & report.</p></div>
+      <div class="fcard"><div class="ic">🎫</div><h3>Foodie Passport</h3><p>Earn badges and levels as you match, book and explore new cuisines.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="download" class="cta-band">
+  <div class="wrap">
+    <h2>Hungry for love?</h2>
+    <p>Join free as a founding member — no charge for your first 3 months.</p>
+    <a href="/app/" class="btn btn-white">Open the app</a>
+  </div>
+</section>
+
+<!-- FOOTER with PARTNER LINKS at the bottom -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="script">Foodies</div>
+        <p>The dating app that matches you on food. Love Food. Love Life.</p>
       </div>
-      <div class="radius-row">
-        <span style="font-size:12px;font-weight:700;color:var(--slate);white-space:nowrap">Within <b id="radLbl" style="color:var(--red)">${state.radius} mi</b></span>
-        <input type="range" min="1" max="15" value="${state.radius}" id="radius" oninput="setRadius(this.value)" style="flex:1">
+      <div>
+        <h4>Foodies</h4>
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="/app/">Get the app</a>
+        <a href="/app/">Log in</a>
       </div>
-      <div class="chips" id="exploreFilters" style="margin-top:4px">
-        <button class="chip ${state.exFilter==='all'?'on':''}" onclick="setExFilter('all')">All</button>
-        <button class="chip ${state.exFilter==='offers'?'on':''}" onclick="setExFilter('offers')">🎁 Offers</button>
-        <button class="chip ${state.exFilter==='forme'?'on':''}" onclick="setExFilter('forme')">For my taste</button>
-        ${me.diets.map(d=>`<button class="chip diet ${state.exDiets.includes(d)?'on':''}" onclick="toggleExDiet('${d}')">${d}</button>`).join("")}
+      <div>
+        <h4>For Partners</h4>
+        <a href="/portal/">Restaurant login <span class="partner-badge">Partners</span></a>
+        <a href="/portal/">List your restaurant</a>
+        <a href="/portal/">Host an event</a>
+        <a href="mailto:partners@findfoodies.com">Partner enquiries</a>
       </div>
-      <div class="pill-toggle" style="margin:12px 0 0">
-        <button class="${state.exView==='list'?'on':''}" onclick="setExView('list')">List</button>
-        <button class="${state.exView==='map'?'on':''}" onclick="setExView('map')">Map</button>
+      <div>
+        <h4>Company</h4>
+        <a href="mailto:hello@findfoodies.com">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="/admin/">Admin</a>
       </div>
     </div>
-    <div class="scroll pad" id="exploreBody" style="padding-top:12px"></div>`;
-}
-
-function filteredVenues(){
-  const c=state.searchCentre||MY_LOC;
-  let list=VENUES.map(v=>({...v,d:haversineMi(c,{lat:v.lat,lng:v.lng})}));
-  list=list.filter(v=>v.d<=state.radius);
-  if(state.exFilter==='offers')list=list.filter(v=>v.offer);
-  if(state.exFilter==='forme')list=list.filter(v=>shared(me.cuisines,v.cuisines).length>0);
-  if(state.exDiets.length)list=list.filter(v=>state.exDiets.every(d=>v.diets.includes(d)));
-  list.sort((a,b)=>{
-    if(state.exFilter==='forme')return shared(me.cuisines,b.cuisines).length-shared(me.cuisines,a.cuisines).length||a.d-b.d;
-    return a.d-b.d;
-  });
-  return list;
-}
-function renderExploreBody(){
-  const body=$("#exploreBody");if(!body)return;
-  const list=filteredVenues();
-  const where=state.searchLabel?`near <b>${state.searchLabel}</b>`:`near you`;
-  if(state.exView==='map'){body.innerHTML=renderMap(list);return;}
-  if(list.length===0){body.innerHTML=`<div style="text-align:center;padding:40px 20px;color:var(--slate)"><div style="font-size:38px;margin-bottom:10px">🔍</div><b style="color:var(--ink)">No venues in range</b><p style="margin-top:6px;font-size:13px">Try widening the radius or clearing filters.</p></div>`;return;}
-  body.innerHTML=`<p class="h-sub" style="margin:-4px 0 14px">${list.length} ${list.length===1?'venue':'venues'} ${where}, closest first.</p>`+list.map(v=>venueCard(v)).join("");
-}
-function venueCard(v){
-  const sh=shared([...me.cuisines],v.cuisines);
-  const dist=(v.d!=null?v.d.toFixed(1):v.distMi.toFixed(1))+" mi";
-  return `<div class="vcard" onclick="openVenue(${v.id})">
-    <img src="${v.img}">
-    <div class="vc">
-      <div class="vn">${v.name}</div>
-      <div class="vsub"><span>⭐ ${v.rating}</span><span>📍 ${v.area.replace(', London','')}</span><span>${dist}</span><span>${v.price}</span></div>
-      <div class="rowb">${v.offer?`<span class="offer">🎁 ${v.offer}</span>`:''}${v.cuisines.slice(0,2).map(c=>`<span class="chip-static ${sh.includes(c)?'teal':''}">${c}</span>`).join("")}</div>
-    </div></div>`;
-}
-// simple schematic map (no external tiles — self-contained)
-function renderMap(list){
-  const c=state.searchCentre||MY_LOC;
-  // project lat/lng to a local box
-  const pad=0.02;
-  const lats=list.map(v=>v.lat).concat(c.lat),lngs=list.map(v=>v.lng).concat(c.lng);
-  const minLat=Math.min(...lats)-pad,maxLat=Math.max(...lats)+pad,minLng=Math.min(...lngs)-pad,maxLng=Math.max(...lngs)+pad;
-  const X=lng=>((lng-minLng)/(maxLng-minLng))*100;
-  const Y=lat=>(1-(lat-minLat)/(maxLat-minLat))*100;
-  const pins=list.map(v=>`<button class="pin" style="left:${X(v.lng)}%;top:${Y(v.lat)}%" onclick="openVenue(${v.id})" title="${v.name}">
-     <span class="pindot">${v.offer?'🎁':'🍽️'}</span><span class="pinlbl">${v.name.split(' ')[0]}</span></button>`).join("");
-  return `
-    <div class="mapbox">
-      <div class="mapgrid"></div>
-      <div class="pin me" style="left:${X(c.lng)}%;top:${Y(c.lat)}%"><span class="pindot" style="background:var(--ink)">📍</span></div>
-      ${pins}
+    <div class="foot-bottom">
+      <span>© 2026 Find Foodies. All rights reserved.</span>
+      <span>hello@findfoodies.com · www.findfoodies.com</span>
     </div>
-    <p class="h-sub" style="margin-top:12px;text-align:center">${list.length} venues shown · tap a pin to view. <br><span style="opacity:.7">Schematic map — live maps come with the full build.</span></p>`;
-}
+  </div>
+</footer>
 
-function runSearch(){
-  const raw=($("#pcInput")?.value||"").trim().toUpperCase();
-  if(!raw){state.searchCentre=null;state.searchLabel=null;renderExploreBody();return;}
-  // try postcode district match, then area-name match
-  const cent=window.POSTCODE_CENTROIDS;
-  let key=Object.keys(cent).find(k=>raw.replace(/\s/g,'').startsWith(k)&&k!=="LONDON");
-  if(key){state.searchCentre={lat:cent[key][0],lng:cent[key][1]};state.searchLabel=key;}
-  else{
-    const v=VENUES.find(x=>x.area.toUpperCase().includes(raw)||x.postcode.toUpperCase().startsWith(raw));
-    if(v){state.searchCentre={lat:v.lat,lng:v.lng};state.searchLabel=v.area.replace(', London','');}
-    else{toast("Try a London postcode like E1 or an area like Soho");return;}
-  }
-  renderExploreBody();
-  toast("Showing venues near "+state.searchLabel);
-}
-function setRadius(v){state.radius=+v;const l=$("#radLbl");if(l)l.textContent=v+" mi";renderExploreBody();}
-function setExFilter(f){state.exFilter=f;document.querySelectorAll("#exploreFilters .chip").forEach(b=>{});switchTab('explore');}
-function toggleExDiet(d){const i=state.exDiets.indexOf(d);if(i<0)state.exDiets.push(d);else state.exDiets.splice(i,1);switchTab('explore');}
-function setExView(v){state.exView=v;switchTab('explore');}
-
-/* ---------- GROUP MEET-UPS ---------- */
-const GROUPS = [
-  {id:1,title:"Ramen crawl through Soho",venueId:6,host:"Priya",when:"Fri · 7:30pm",spots:6,going:4,vibe:"Casual",cuisine:"Japanese",attendees:[2,5,3]},
-  {id:2,title:"Sunday mezze & shisha",venueId:5,host:"Leila",when:"Sun · 2:00pm",spots:8,going:5,vibe:"Relaxed",cuisine:"Lebanese",attendees:[4,1,5]},
-  {id:3,title:"Taco Tuesday, new in town welcome",venueId:18,host:"Amara",when:"Tue · 8:00pm",spots:10,going:7,vibe:"Lively",cuisine:"Mexican",attendees:[1,3,2]},
-  {id:4,title:"Vegan brunch club",venueId:22,host:"Chloé",when:"Sat · 11:00am",spots:6,going:3,vibe:"Chilled",cuisine:"Plant-based",attendees:[5,4]}
-];
-function tabGroups(){
-  return `
-    <div class="appbar"><div class="script" style="font-size:24px">Meet-ups</div><div class="spacer"></div>
-      <button class="back" onclick="toast('Host a meet-up — demo')">＋</button></div>
-    <div class="scroll pad">
-      <div style="background:linear-gradient(135deg,var(--red),var(--red-deep));border-radius:18px;padding:18px;color:#fff;margin-bottom:16px">
-        <b style="font-size:16px">Not just 1-on-1 🍜</b>
-        <p style="font-size:13px;opacity:.92;margin-top:5px;line-height:1.5">Join a table of fellow Foodies. Great for new friends, low pressure, and always good food. Everyone's verified.</p>
-      </div>
-      ${GROUPS.map(g=>groupCard(g)).join("")}
-    </div>`;
-}
-function groupCard(g){
-  const v=VENUES.find(x=>x.id===g.venueId);
-  const joined=state.groups.includes(g.id);
-  const going=g.going+(joined?1:0);
-  return `<div class="gcard">
-    <div class="gtop" style="background:url('${v.img}') center/cover">
-      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)"></div>
-      <div class="gv" style="position:relative">${g.title}</div>
-    </div>
-    <div class="gbody">
-      <div class="gmeta"><span>📍 ${v.name}, ${v.area.replace(', London','')}</span></div>
-      <div class="gmeta"><span>🗓️ ${g.when}</span><span>🍽️ ${g.cuisine}</span><span>✨ ${g.vibe}</span></div>
-      <div style="display:flex;align-items:center;gap:12px;margin-top:4px">
-        <div class="avstack">
-          ${g.attendees.map(id=>{const f=FOODIES.find(x=>x.id===id);return `<img src="${f.img}">`}).join("")}
-          <div class="more">+${Math.max(0,going-g.attendees.length)}</div>
-        </div>
-        <span style="font-size:12px;color:var(--slate)">${going}/${g.spots} going · hosted by ${g.host}</span>
-        <button class="btn ${joined?'btn-dark':'btn-coral'} btn-sm" style="margin-left:auto" onclick="toggleGroup(${g.id})">${joined?'Going ✓':'Join'}</button>
-      </div>
-    </div></div>`;
-}
-function toggleGroup(id){
-  const i=state.groups.indexOf(id);
-  if(i<0){state.groups.push(id);const g=GROUPS.find(x=>x.id===id);toast("You're going 🎉");notify("You joined a meet-up 🍜",g.title+" · "+g.when);}
-  else{state.groups.splice(i,1);toast("Left the meet-up");}
-  switchTab('groups');
-}
-
-/* ---------- CHATS ---------- */
-function tabChats(){
-  const list=state.matches;
-  const newMatches=list.filter(m=>!state.threads[m.id]);
-  return `
-    <div class="appbar"><div class="script" style="font-size:24px">Foodie chats</div></div>
-    <div class="scroll pad">
-      <div class="shead"><h3>New matches</h3></div>
-      <div style="display:flex;gap:14px;overflow-x:auto;padding-bottom:6px;margin-bottom:8px">
-        ${list.map(m=>`<div style="text-align:center;cursor:pointer;flex-shrink:0" onclick="openChat(${m.id})">
-          <img src="${m.img}" style="width:66px;height:66px;border-radius:50%;object-fit:cover;border:3px solid ${state.threads[m.id]&&state.threads[m.id].length>3?'transparent':'var(--coral)'}">
-          <div style="font-size:11.5px;font-weight:600;margin-top:5px">${m.name}</div></div>`).join("")}
-      </div>
-      <div class="divide"></div>
-      <div class="shead"><h3>Messages</h3></div>
-      ${list.filter(m=>state.threads[m.id]).map(m=>{
-        const t=state.threads[m.id];const last=t[t.length-1];
-        return `<div class="crow" onclick="openChat(${m.id})">
-          <img src="${m.img}">
-          <div class="ci"><div class="cn">${m.name} <small>now</small></div>
-          <div class="cm">${last.venue?"🍽️ Shared a venue":(last.who==='me'?'You: ':'')+last.text}</div></div>
-        </div>`;
-      }).join("")||'<p class="h-sub">Match with someone to start chatting.</p>'}
-    </div>`;
-}
-
-/* ---------- CHAT THREAD ---------- */
-function openChat(id){state.activeChat=id;go("chat",{id});}
-route("chat",({id})=>{
-  const f=FOODIES.find(x=>x.id===id)||state.matches.find(x=>x.id===id);
-  const sh=shared(me.cuisines,f.cuisines);
-  if(!state.threads[id])state.threads[id]=[];
-  const ices=[
-    `Omakase or ramen? 🍜`,`Best ${sh[0]||'dinner'} spot you know?`,`Free this Friday? 🍷`,`Sweet or savoury person?`
-  ];
-  return `
-    <div class="appbar"><button class="back" onclick="enterApp()">‹</button>
-      <img src="${f.img}" style="width:38px;height:38px;border-radius:50%;object-fit:cover">
-      <div><div style="font-size:16px;font-weight:800;line-height:1.1">${f.name}</div><div style="font-size:11px;opacity:.85">● Online</div></div>
-      <div class="spacer"></div>
-      <button class="back" onclick="startCall(${id})" title="Video date">📹</button>
-      <button class="back" onclick="openSafety(${id})" title="Safety">🛡️</button>
-      <button class="back" onclick="toast('Block / report — demo')">⋯</button></div>
-    <div style="background:#F0FBFA;border-bottom:1px solid #D8F0EC;padding:9px 16px;font-size:12px;color:#0C8073;display:flex;align-items:center;gap:8px">
-      🍽️ You both love <b>${sh.join(" & ")||f.cuisines[0]}</b> · <button class="link" style="color:#0C8073;font-weight:700" onclick="openShare(${id})">suggest a venue</button></div>
-    <div id="thread"></div>
-    <div class="ice">${ices.map(i=>`<button onclick="quickSend(${id},'${i.replace(/'/g,"")}')">${i}</button>`).join("")}</div>
-    <div class="composer">
-      <button class="share" onclick="openShare(${id})">🍽️</button>
-      <input id="msgInput" placeholder="Message ${f.name}…" onkeydown="if(event.key==='Enter')sendMsg(${id})">
-      <button class="send" onclick="sendMsg(${id})">➤</button>
-    </div>`;
-});
-routes.chat.after=(el,{id})=>{renderThread(id);};
-function renderThread(id){
-  const th=$("#thread");if(!th)return;
-  th.innerHTML=state.threads[id].map(m=>{
-    if(m.venue){const v=m.venue;return `<div class="bub venue"><img src="${v.img}"><div class="vb"><b>${v.name}</b><p>${v.cuisines.slice(0,2).join(", ")} · ${v.dist} · ${v.rating}⭐</p><button class="btn btn-coral btn-sm" style="width:100%" onclick="openVenue(${v.id})">Book a table</button></div></div>`;}
-    return `<div class="bub ${m.who}">${m.text}</div>`;
-  }).join("");
-  th.scrollTop=th.scrollHeight;
-}
-function sendMsg(id){const inp=$("#msgInput");const v=inp.value.trim();if(!v)return;state.threads[id].push({who:"me",text:v});inp.value="";renderThread(id);replyLater(id);}
-function quickSend(id,txt){state.threads[id].push({who:"me",text:txt});renderThread(id);replyLater(id);}
-function replyLater(id){
-  const th=$("#thread");const typ=document.createElement("div");typ.className="typing";typ.innerHTML="<i></i><i></i><i></i>";th.appendChild(typ);th.scrollTop=th.scrollHeight;
-  const replies=["Ooh good question 😄","Yes! Let's do it.","I know the perfect place actually…","You had me at dessert."];
-  setTimeout(()=>{typ.remove();const rep=replies[Math.floor(Math.random()*replies.length)];state.threads[id].push({who:"them",text:rep});renderThread(id);const f=FOODIES.find(x=>x.id===id);if(current!=="chat"||state.activeChat!==id)notify(`${f?f.name:"Foodie"} sent a message`,rep);},1400);
-}
-
-/* ---------- SHARE VENUE in chat ---------- */
-function openShare(id){go("share",{id});}
-route("share",({id})=>{
-  const f=FOODIES.find(x=>x.id===id)||state.matches.find(x=>x.id===id);
-  const venues=bestVenuesFor(f);
-  return `
-    <div class="appbar"><button class="back" onclick="openChat(${id})">‹</button>
-      <div class="script" style="font-size:20px">Suggest to ${f.name}</div></div>
-    <div style="padding:12px 16px 0"><p class="h-sub">Best for you both — ranked by shared taste${me.diets.length?", "+me.diets[0].toLowerCase()+"-friendly":""} and live offers.</p></div>
-    <div class="scroll pad" style="padding-top:12px">
-      ${venues.map(v=>`<div class="vcard" style="align-items:center">
-        <img src="${v.img}">
-        <div class="vc"><div class="vn">${v.name}</div>
-          <div class="vsub"><span>⭐ ${v.rating}</span><span>📍 ${v.dist}</span></div>
-          <div class="rowb">${v.offer?`<span class="offer">🎁 offer</span>`:''}${shared(me.cuisines,f.cuisines).filter(c=>v.cuisines.includes(c)).map(c=>`<span class="chip-static teal">${c}</span>`).join("")}</div>
-        </div>
-        <button class="btn btn-coral btn-sm" style="align-self:center" onclick="shareVenue(${id},${v.id})">Send</button>
-      </div>`).join("")}
-    </div>`;
-});
-function shareVenue(chatId,venueId){const v=VENUES.find(x=>x.id===venueId);state.threads[chatId].push({who:"me",text:"How about here? 🍽️",});state.threads[chatId].push({who:"me",venue:v});openChat(chatId);toast("Venue shared");setTimeout(()=>replyLater(chatId),400);}
-
-/* ---------- VENUE DETAIL ---------- */
-function openVenue(id){state.bookingVenue=VENUES.find(v=>v.id===id);go("venue",{id});}
-route("venue",({id})=>{
-  const v=VENUES.find(x=>x.id===id);
-  return `
-    <div class="scroll">
-      <div style="position:relative">
-        <img id="vdImg" src="${v.img}">
-        <button class="back" style="position:absolute;top:calc(14px + env(safe-area-inset-top,0px));left:14px;background:rgba(0,0,0,.4)" onclick="enterApp()">‹</button>
-        <button class="back" style="position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:14px;background:rgba(0,0,0,.4)" onclick="toast('Saved to favourites ♥')">♡</button>
-        ${v.offer?`<div style="position:absolute;bottom:14px;left:16px" class="offer">🎁 ${v.offer}</div>`:""}
-      </div>
-      <div class="vdhead">
-        <h2>${v.name}</h2>
-        <div class="vdrow"><span>⭐ ${v.rating}</span><span>·</span><span>📍 ${v.dist}</span><span>·</span><span>${v.price}</span><span>·</span><span>${v.area}</span></div>
-        <div class="chips" style="margin-top:12px">${v.cuisines.map(c=>`<span class="chip-static ${me.cuisines.includes(c)?'teal':''}">${c}</span>`).join("")}${v.diets.map(d=>`<span class="chip-static hot">${d}</span>`).join("")}</div>
-      </div>
-      <div class="pad" style="padding-top:14px">
-        <div class="info-line"><span class="ic">🕐</span><div><b>Open all week</b>${v.hours}</div></div>
-        <div class="info-line"><span class="ic">📍</span><div><b>Address</b>${v.addr}</div></div>
-        <div class="info-line"><span class="ic">🎉</span><div><b>Atmosphere</b>${v.tags.join(" · ")}</div></div>
-        <div style="margin-top:10px"><button class="btn btn-coral" onclick="go('book',{id:${v.id}})">Book a table</button></div>
-      </div>
-    </div>`;
-});
-
-/* ---------- BOOKING ---------- */
-route("book",({id})=>{
-  const v=VENUES.find(x=>x.id===id);
-  const days=["FRI","SAT","SUN","MON","TUE"];const nums=[8,9,10,11,12];
-  const slots=["6:00","6:30","7:00","7:30","8:00","8:30","9:00","9:30","10:00"];
-  const off=[0,8];
-  return `
-    <div class="appbar"><button class="back" onclick="openVenue(${id})">‹</button><div class="script" style="font-size:22px">Book a table</div></div>
-    <div class="scroll pad">
-      <div class="vcard" style="cursor:default"><img src="${v.img}"><div class="vc"><div class="vn">${v.name}</div><div class="vsub"><span>⭐ ${v.rating}</span><span>📍 ${v.dist}</span></div>${v.offer?`<span class="offer">🎁 ${v.offer}</span>`:''}</div></div>
-      <div class="divide"></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <b style="font-size:15px">Guests</b>
-        <div class="stepper"><button onclick="stepGuests(-1)">−</button><span id="gv">${state.bookGuests}</span><button onclick="stepGuests(1)">+</button></div>
-      </div>
-      <b style="font-size:15px;display:block;margin-bottom:11px">Select date</b>
-      <div class="seg" id="dateSeg">${days.map((d,i)=>`<div class="datep ${i===state.bookDate?'on':''}" onclick="pickDate(${i})"><b>${d}</b><span>${nums[i]}</span></div>`).join("")}</div>
-      <b style="font-size:15px;display:block;margin:20px 0 11px">Select time</b>
-      <div class="slots" id="slotGrid">${slots.map((s,i)=>`<div class="slot ${off.includes(i)?'off':''} ${state.bookSlot===s?'on':''}" onclick="pickSlot('${s}')">${s} pm</div>`).join("")}</div>
-    </div>
-    <div class="pad" style="padding-top:0"><button class="btn btn-coral" id="confirmBtn" onclick="confirmBooking(${id})">Confirm booking</button></div>`;
-});
-function stepGuests(n){state.bookGuests=Math.max(1,Math.min(12,state.bookGuests+n));$("#gv").textContent=state.bookGuests;}
-function pickDate(i){state.bookDate=i;document.querySelectorAll("#dateSeg .datep").forEach((d,idx)=>d.classList.toggle("on",idx===i));}
-function pickSlot(s){state.bookSlot=s;document.querySelectorAll("#slotGrid .slot").forEach(el=>el.classList.toggle("on",el.textContent.startsWith(s)));}
-function confirmBooking(id){if(!state.bookSlot){toast("Pick a time first");return;}const v=VENUES.find(x=>x.id===id);notify("Table booked ✅",`${v.name} · ${state.bookGuests} guests at ${state.bookSlot} pm`);go("booked",{id});}
-
-route("booked",({id})=>{
-  const v=VENUES.find(x=>x.id===id);
-  return `<div class="scroll center red-bg" style="padding:36px 30px">
-    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">
-      <div style="width:78px;height:78px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:38px;color:#fff;box-shadow:var(--shadow-lg)">✓</div>
-      <h1 class="big" style="color:#fff;margin-top:22px">Table booked!</h1>
-      <p style="color:#fff;opacity:.92;margin-top:8px;font-size:15px">${v.name} · ${state.bookGuests} guests<br>${state.bookSlot} pm</p>
-      ${v.offer?`<div style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:12px 16px;margin-top:20px;color:#fff;font-size:13px">🎁 Your offer is applied: <b>${v.offer}</b></div>`:""}
-      <div style="background:rgba(255,255,255,.12);border-radius:14px;padding:14px 16px;margin-top:16px;color:#fff;font-size:12px;text-align:left;line-height:1.6;width:100%;max-width:320px">
-        <b>🛡️ Meeting safely</b><br>Tell a friend your plans with <b>Share my date</b>, meet in this public venue, and trust your instincts. You've got this.</div>
-    </div>
-    <button class="btn btn-white" onclick="enterApp()">Done</button>
-  </div>`;
-});
-routes.booked.red=true;
-
-/* ---------- PROFILE ---------- */
-function tabProfile(){
-  return `
-    <div class="scroll">
-      <div class="pfhero">
-        <img src="img/p6.jpg">
-        <div class="grad"></div>
-        <div class="nm"><h2>You, 28 <span style="font-size:15px;color:#4FC3F7">✓</span></h2>
-          <div class="tier">👑 ${state.tier==='gold'?'Gold Foodie':'Free member'}</div></div>
-      </div>
-      <div class="pad">
-        <div style="display:flex;gap:8px;margin-bottom:6px" class="chips">${me.cuisines.map(c=>`<span class="chip-static teal">${c}</span>`).join("")}</div>
-        <div class="divide"></div>
-        <div class="menu-row" onclick="go('plans')"><span class="ic">👑</span> Go Gold — unlock chat & who likes you <span class="ar">›</span></div>
-        <div class="menu-row" onclick="switchTabFromProfile('chats')"><span class="ic">📋</span> My bookings <span class="ar">›</span></div>
-        <div class="menu-row" onclick="doInstall()"><span class="ic">📲</span> Install Foodies app <span class="ar">›</span></div>
-        <div class="menu-row" onclick="manualNotif()"><span class="ic">🔔</span> Notifications <span class="ar">›</span></div>
-        <div class="menu-row" onclick="toast('Favourites — demo')"><span class="ic">♥</span> Saved venues <span class="ar">›</span></div>
-        <div class="menu-row" onclick="toast('Edit profile — demo')"><span class="ic">✏️</span> Edit profile & prompts <span class="ar">›</span></div>
-        <div class="menu-row" onclick="go('safety',{})"><span class="ic">🛡️</span> Safety centre <span class="ar">›</span></div>
-        <div class="menu-row" onclick="toast('Settings — demo')"><span class="ic">⚙️</span> Account settings <span class="ar">›</span></div>
-        <div class="menu-row" onclick="go('about',{})"><span class="ic">💬</span> Help &amp; contact <span class="ar">›</span></div>
-        <div class="menu-row" style="color:var(--red)" onclick="go('welcome')"><span class="ic">↩</span> Sign out</div>
-      </div>
-    </div>`;
-}
-function switchTabFromProfile(t){enterApp();setTimeout(()=>switchTab(t),50);}
-function manualNotif(){
-  if(!("Notification" in window)){toast("Notifications not supported here");return;}
-  if(Notification.permission==="granted"){notify("Notifications are on 🔔","Here's how a match alert looks.");toast("Notifications already on");}
-  else{sessionStorage.removeItem("notifAsked");askNotifications();}
-}
-
-/* ---------- PLANS ---------- */
-route("plans",()=>`
-  <div class="appbar"><button class="back" onclick="enterApp()">‹</button><div class="script" style="font-size:22px">Foodies plans</div></div>
-  <div class="scroll pad">
-    <p class="h-sub" style="margin-bottom:18px">Join free. Upgrade anytime to chat with everyone and see who's already liked you.</p>
-    <div class="plan">
-      <div class="pt">Free</div><div class="pp">£0<small> forever</small></div>
-      <ul><li>Create your profile & get verified</li><li>Swipe and match on shared cuisines</li><li>Chat with your mutual matches</li><li>Book tables at partner venues</li></ul>
-      <button class="btn btn-dark" style="margin-top:16px" onclick="setTier('free')">${state.tier==='free'?'Current plan':'Choose Free'}</button>
-    </div>
-    <div class="plan gold">
-      <div class="rec">MOST POPULAR</div>
-      <div class="pt">Gold Foodie</div><div class="pp">£14.99<small> /month</small></div>
-      <ul><li>See everyone who already likes you</li><li>Unlimited likes & 5 super stars a day</li><li>Message before you match</li><li>Priority venue offers & bookings</li><li>Rewind unlimited swipes</li></ul>
-      <button class="btn btn-primary" style="margin-top:16px" onclick="setTier('gold')">${state.tier==='gold'?'Current plan':'Go Gold'}</button>
-    </div>
-    <p class="h-sub" style="text-align:center">Cancel anytime. Prices shown for demo.</p>
-  </div>`);
-function setTier(t){state.tier=t;toast(t==='gold'?'Welcome to Gold Foodie 👑':'You are on the Free plan');enterApp();}
-
-/* ---------- PWA: service worker, install, notifications ---------- */
-let swReg=null, deferredInstall=null;
-if("serviceWorker" in navigator){
-  navigator.serviceWorker.register("sw.js").then(r=>{swReg=r;}).catch(()=>{});
-}
-// capture the install prompt (Android/Chrome)
-window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;showInstallBar();});
-window.addEventListener("appinstalled",()=>{deferredInstall=null;hideInstallBar();toast("Foodies installed 🎉");});
-
-function isStandalone(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;}
-function isIOS(){return /iphone|ipad|ipod/i.test(navigator.userAgent);}
-
-function showInstallBar(){
-  if(isStandalone()||document.getElementById("installBar"))return;
-  const b=document.createElement("div");b.id="installBar";
-  b.innerHTML=`<div style="display:flex;align-items:center;gap:12px">
-     <img src="icon-192.png" style="width:40px;height:40px;border-radius:11px">
-     <div style="flex:1;line-height:1.25"><b style="font-size:13.5px">Install Foodies</b><div style="font-size:11.5px;opacity:.75">Add to your home screen</div></div>
-     <button onclick="doInstall()" style="background:var(--red);color:#fff;border:0;border-radius:10px;padding:9px 15px;font-weight:700;font-size:13px;cursor:pointer">Install</button>
-     <button onclick="hideInstallBar()" style="background:none;border:0;font-size:20px;color:#9AA3B0;cursor:pointer">×</button>
-   </div>`;
-  Object.assign(b.style,{position:"absolute",left:"12px",right:"12px",bottom:"calc(12px + var(--safe-b))",background:"#fff",borderRadius:"16px",padding:"12px 14px",boxShadow:"var(--shadow-lg)",zIndex:80});
-  document.getElementById("device").appendChild(b);
-}
-function hideInstallBar(){const b=document.getElementById("installBar");if(b)b.remove();}
-function doInstall(){
-  if(deferredInstall){deferredInstall.prompt();deferredInstall.userChoice.finally(()=>{deferredInstall=null;hideInstallBar();});}
-  else if(isIOS()){showIOSInstall();}
-  else{toast("Use your browser menu → Add to Home Screen");hideInstallBar();}
-}
-function showIOSInstall(){
-  const m=document.createElement("div");m.id="iosSheet";
-  m.innerHTML=`<div style="background:#fff;border-radius:20px 20px 0 0;padding:22px;text-align:center">
-    <img src="icon-192.png" style="width:56px;height:56px;border-radius:15px;margin-bottom:10px">
-    <h3 style="font-size:17px;margin-bottom:6px">Install Foodies</h3>
-    <p style="font-size:13.5px;color:var(--slate);line-height:1.5">Tap the <b>Share</b> icon <span style="font-size:16px">􀈂</span> in Safari, then choose <b>“Add to Home Screen”</b>.</p>
-    <button onclick="document.getElementById('iosSheet').remove()" class="btn btn-coral" style="margin-top:16px">Got it</button></div>`;
-  Object.assign(m.style,{position:"absolute",inset:0,background:"rgba(0,0,0,.45)",zIndex:90,display:"flex",alignItems:"flex-end"});
-  m.onclick=e=>{if(e.target===m)m.remove();};
-  document.getElementById("device").appendChild(m);
-}
-
-// Notification permission — asked at a natural moment (after first match / entering app)
-function askNotifications(){
-  if(!("Notification" in window))return;
-  if(Notification.permission!=="default")return;      // already asked
-  if(sessionStorage.getItem("notifAsked"))return;
-  sessionStorage.setItem("notifAsked","1");
-  const m=document.createElement("div");m.id="notifSheet";
-  m.innerHTML=`<div style="background:#fff;border-radius:22px;padding:26px 22px;text-align:center;max-width:330px;margin:auto">
-    <div style="width:64px;height:64px;border-radius:50%;background:#FFE9E9;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 14px">🔔</div>
-    <h3 style="font-size:19px;margin-bottom:8px">Never miss a match</h3>
-    <p style="font-size:13.5px;color:var(--slate);line-height:1.55">Turn on notifications and we'll let you know about new matches, messages and table bookings.</p>
-    <button onclick="enableNotifications()" class="btn btn-primary" style="margin-top:18px">Turn on notifications</button>
-    <button onclick="document.getElementById('notifSheet').remove()" class="link" style="margin-top:14px;width:100%;color:var(--slate)">Not now</button>
-  </div>`;
-  Object.assign(m.style,{position:"absolute",inset:0,background:"rgba(0,0,0,.5)",zIndex:90,display:"flex",padding:"24px"});
-  document.getElementById("device").appendChild(m);
-}
-function enableNotifications(){
-  const sheet=document.getElementById("notifSheet");if(sheet)sheet.remove();
-  Notification.requestPermission().then(p=>{
-    if(p==="granted"){
-      toast("Notifications on 🔔");
-      notify("Welcome to Foodies!","We'll ping you the moment someone likes you.");
-    }else{toast("You can turn these on later in Settings");}
-  });
-}
-function notify(title,body){
-  if(!("Notification" in window)||Notification.permission!=="granted")return;
-  if(swReg&&swReg.active){swReg.active.postMessage({type:"notify",title,body});}
-  else{try{new Notification(title,{body,icon:"icon-192.png"});}catch(e){}}
-}
-
-/* ---------- VIDEO DATE (pre-meet call) ---------- */
-let callTimer=null;
-function startCall(id){
-  const f=FOODIES.find(x=>x.id===id)||state.matches.find(x=>x.id===id);if(!f)return;
-  let cs=document.getElementById("callScreen");if(cs)cs.remove();
-  cs=document.createElement("div");cs.id="callScreen";cs.className="show";
-  cs.innerHTML=`
-    <div class="callmain">
-      <img src="${f.img}" alt="${f.name}">
-      <div class="callinfo"><h3>${f.name}</h3><p id="callState">Connecting…</p></div>
-      <div class="callbadge">🔒 Foodies keeps your number private</div>
-      <div class="callself"><img src="img/p6.jpg"></div>
-    </div>
-    <div class="callbar">
-      <button class="callbtn" onclick="toast('Mic off')">🎤</button>
-      <button class="callbtn end" onclick="endCall()">📞</button>
-      <button class="callbtn" onclick="toast('Camera flipped')">🔄</button>
-    </div>`;
-  document.getElementById("device").appendChild(cs);
-  let s=0;const states=["Connecting…","Ringing…","Connected — say hi! 👋"];
-  callTimer=setInterval(()=>{s++;const el=document.getElementById("callState");if(el&&s<states.length)el.textContent=states[s];if(s>=states.length){clearInterval(callTimer);let sec=0;callTimer=setInterval(()=>{sec++;const e2=document.getElementById("callState");if(e2)e2.textContent="00:"+String(sec).padStart(2,"0");},1000);}},1100);
-}
-function endCall(){clearInterval(callTimer);const cs=document.getElementById("callScreen");if(cs){cs.classList.remove("show");setTimeout(()=>cs.remove(),200);}toast("Call ended — nice chat!");}
-
-/* ---------- SAFETY TOOLKIT ---------- */
-route("safety",({id})=>{
-  const f=id?(FOODIES.find(x=>x.id===id)||state.matches.find(x=>x.id===id)):null;
-  return `
-    <div class="appbar"><button class="back" onclick="${id?`openChat(${id})`:'enterApp()'}">‹</button><div class="script" style="font-size:22px">Safety centre</div></div>
-    <div class="scroll pad">
-      ${f?`<div style="background:#F0FBFA;border:1px solid #D8F0EC;border-radius:14px;padding:13px 15px;font-size:13px;color:#0C8073;margin-bottom:16px">You're chatting with <b>${f.name}</b> ${f.verified?'· ✓ photo verified':''}. Here are your safety tools for this match.</div>`:''}
-      <div class="safety-tile"><div class="st-ic">📹</div><div><b>Video date first</b><p>Get to know each other on a private in-app call before meeting — your number stays hidden.</p></div>${f?`<button class="btn btn-coral btn-sm sw" onclick="startCall(${id})">Start</button>`:''}</div>
-      <div class="safety-tile"><div class="st-ic">📍</div><div><b>Share my date plan</b><p>Send a trusted friend where you're going, who with, and when — with a live check-in timer.</p></div><div class="switch ${state.safety_share?'on':''}" onclick="toggleSafety(this,'safety_share')"><i></i></div></div>
-      <div class="safety-tile"><div class="st-ic">✅</div><div><b>Meet in a Foodies venue</b><p>All suggested venues are public, staffed places — never a private address.</p></div><div class="switch on" style="pointer-events:none"><i></i></div></div>
-      <div class="safety-tile"><div class="st-ic">🔔</div><div><b>Safe-arrival check-in</b><p>We'll nudge you during your date to check you're OK. One tap for help if not.</p></div><div class="switch ${state.safety_checkin?'on':''}" onclick="toggleSafety(this,'safety_checkin')"><i></i></div></div>
-      <div class="safety-tile"><div class="st-ic">🚩</div><div><b>Block & report</b><p>Anyone making you uncomfortable can be blocked and reported instantly. We review every report.</p></div><button class="btn btn-sm sw" style="background:#FFF0F0;color:var(--red);width:auto" onclick="toast('Reported — our team will review (demo)')">Report</button></div>
-      <div class="divide"></div>
-      <div style="background:#FFF6F6;border:1px solid #F8D7D7;border-radius:14px;padding:14px 16px;font-size:12.5px;color:var(--red-dark);line-height:1.6">
-        <b>In an emergency, always call 999.</b><br>Foodies safety tools support a good date — they don't replace emergency services.
-      </div>
-    </div>`;
-});
-function openSafety(id){go("safety",{id});}
-function toggleSafety(el,key){state[key]=!state[key];el.classList.toggle("on",state[key]);toast(state[key]?"Turned on":"Turned off");}
-
-/* ---------- ABOUT / CONTACT ---------- */
-route("about",()=>`
-  <div class="appbar"><button class="back" onclick="enterApp()">‹</button><div class="script" style="font-size:22px">Help &amp; contact</div></div>
-  <div class="scroll center red-bg" style="padding:36px 30px">
-    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center">
-      <div class="brandmark" style="font-size:44px">Foodies</div>
-      <div class="tag" style="margin:8px 0 30px">LOVE <b>FOOD</b> . LOVE <b>LIFE</b></div>
-      <p style="opacity:.9;font-size:14px;line-height:1.6;max-width:300px">Our friendly team is here 7 days a week for any help or advice along the way.</p>
-      <div style="margin-top:30px;text-align:left;width:100%;max-width:300px">
-        <div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.2)"><span style="font-size:18px">✉️</span><div><div style="font-size:11px;opacity:.7;font-weight:700;letter-spacing:.5px">EMAIL</div>hello@findfoodies.com</div></div>
-        <div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.2)"><span style="font-size:18px">🌐</span><div><div style="font-size:11px;opacity:.7;font-weight:700;letter-spacing:.5px">WEBSITE</div>www.findfoodies.com</div></div>
-        <div style="display:flex;align-items:center;gap:14px;padding:12px 0"><span style="font-size:18px">💬</span><div><div style="font-size:11px;opacity:.7;font-weight:700;letter-spacing:.5px">IN-APP</div>Help centre &amp; report a problem</div></div>
-      </div>
-    </div>
-    <button class="btn btn-white" onclick="enterApp()">Back to app</button>
-  </div>`);
-routes.about.red=true;
-
-/* ---------- boot ---------- */
-go("welcome");
-</script>
 </body>
 </html>
